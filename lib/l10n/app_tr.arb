@@ -1,0 +1,18 @@
+{
+  "homepageTitle": "Keşfet",
+  "homepageDescription": "Hazır olan diyaloglar ile sohbet başlat!",
+  "homepageCategoryEmail": "Mail",
+  "homepageCategoryEducation": "Eğitim",
+  "homepageCategoryArt": "Sanat",
+  "homepageCategoryFun": "Eğlence",
+  "homepageCategorySocial": "Sosyal",
+  "homepageCategoryTravel": "Gezi",
+
+  "chatsTitle": "Sohbetler",
+  "chatsDescription": "Sohbet geçmişin!",
+  "chatsMyChat": "Sohbetim",
+  "chatsDeleteErrorTitle": "Hata",
+  "chatsDeleteErrorMessage": "Sohbet kaydı silinirken hata oluştu!",
+  "chatsDeleteSuccessTitle": "Başarılı",
+  "chatsDeleteSuccessMessage": "Sohbet kaydı başarıyla silindi!"
+}

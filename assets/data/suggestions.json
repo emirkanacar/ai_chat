@@ -1,0 +1,137 @@
+{
+  "dataType": "suggestions",
+  "data": [
+    {
+      "categoryCode": "email",
+      "categoryName": "E-Mail",
+      "prompts": [
+        {
+          "promptCode": "Develop an enticing email to promote [your seasonal or holiday sale]. Clearly outline [your discounts or special offers], and create a sense of urgency to drive engagement",
+          "prompt": "Seasonal or holiday sale emails"
+        },
+        {
+          "promptCode": "deneme-2",
+          "prompt": "deneme-2"
+        },
+        {
+          "promptCode": "deneme-3",
+          "prompt": "deneme-3"
+        },
+        {
+          "promptCode": "deneme-4",
+          "prompt": "deneme-4"
+        }
+      ]
+    },
+    {
+      "categoryCode": "education",
+      "categoryName": "Education",
+      "prompts": [
+        {
+          "promptCode": "education-1",
+          "prompt": "education-1"
+        },
+        {
+          "promptCode": "education-2",
+          "prompt": "education-2"
+        },
+        {
+          "promptCode": "education-3",
+          "prompt": "education-3"
+        },
+        {
+          "promptCode": "education-4",
+          "prompt": "education-4"
+        }
+      ]
+    },
+    {
+      "categoryCode": "art",
+      "categoryName": "Art",
+      "prompts": [
+        {
+          "promptCode": "art-1",
+          "prompt": "art-1"
+        },
+        {
+          "promptCode": "art-2",
+          "prompt": "art-2"
+        },
+        {
+          "promptCode": "art-3",
+          "prompt": "art-3"
+        },
+        {
+          "promptCode": "art-4",
+          "prompt": "art-4"
+        }
+      ]
+    },
+    {
+      "categoryCode": "fun",
+      "categoryName": "Fun",
+      "prompts": [
+        {
+          "promptCode": "fun-1",
+          "prompt": "fun-1"
+        },
+        {
+          "promptCode": "fun-2",
+          "prompt": "fun-2"
+        },
+        {
+          "promptCode": "fun-3",
+          "prompt": "fun-3"
+        },
+        {
+          "promptCode": "fun-4",
+          "prompt": "fun-4"
+        }
+      ]
+    },
+    {
+      "categoryCode": "social",
+      "categoryName": "Social",
+      "prompts": [
+        {
+          "promptCode": "social-1",
+          "prompt": "social-1"
+        },
+        {
+          "promptCode": "social-2",
+          "prompt": "social-2"
+        },
+        {
+          "promptCode": "social-3",
+          "prompt": "social-3"
+        },
+        {
+          "promptCode": "social-4",
+          "prompt": "social-4"
+        }
+      ]
+    },
+    {
+      "categoryCode": "travel",
+      "categoryName": "Travel",
+      "prompts": [
+        {
+          "promptCode": "travel-1",
+          "prompt": "travel-1"
+        },
+        {
+          "promptCode": "travel-2",
+          "prompt": "travel-2"
+        },
+        {
+          "promptCode": "travel-3",
+          "prompt": "travel-3"
+        },
+        {
+          "promptCode": "travel-4",
+          "prompt": "travel-4"
+        }
+      ]
+    }
+  ]
+}

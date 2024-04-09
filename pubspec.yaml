@@ -1,0 +1,58 @@
+name: ai_chat
+description: "ai chat app"
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.2.6 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  hive: ^2.2.3
+  firebase_auth: ^4.17.4
+  firebase_core: ^2.25.4
+  google_fonts: ^6.1.0
+  lottie: ^3.0.0
+  fluttertoast: ^8.2.4
+  icons_plus: ^5.0.0
+  flutter_svg: ^2.0.10+1
+  device_info: ^2.0.3
+  dropdown_button2: ^2.3.9
+  animated_toggle_switch: ^0.8.2
+  file_picker: ^6.2.0
+  provider: ^6.1.2
+  quickalert: ^1.1.0
+  google_generative_ai: ^0.2.2
+  flutter_dotenv: ^5.1.0
+  uuid: ^4.3.3
+  flutter_markdown: ^0.6.22
+  intl: any
+  image_picker: ^1.0.7
+  toastification: ^1.2.1
+  hive_flutter: ^1.1.0
+  path_provider: ^2.1.2
+  jiffy: ^6.0.0
+  toggle_switch: ^2.3.0
+  flutter_localizations:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+  build_runner: 2.4.9
+  hive_generator: 2.0.1
+
+flutter:
+  uses-material-design: true
+  generate: true
+
+  assets:
+    - .env
+    - assets/animations/
+    - assets/images/
+    - assets/icons/
+    - assets/data/
