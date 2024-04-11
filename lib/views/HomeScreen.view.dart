@@ -70,25 +70,27 @@ class _HomeScreenState extends State<HomeScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                      padding: EdgeInsets.only(top: 20, right: 20, left: 20),
-                      child: Text(AppLocalizations.of(context)!.homepageTitle, style: GoogleFonts.raleway(
-                          fontWeight: FontWeight.w900,
-                          fontSize: 36
-                      ),)
-                  ),
-                  Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
-                      child: Text(AppLocalizations.of(context)!.homepageDescription, style: GoogleFonts.raleway(
-                          textStyle: Theme.of(context).textTheme.labelSmall,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14
-                      ),)
-                  ),
-                ],
+              Flexible(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                        padding: EdgeInsets.only(top: 20, right: 20, left: 20),
+                        child: Text(AppLocalizations.of(context)!.homepageTitle, style: GoogleFonts.raleway(
+                            fontWeight: FontWeight.w900,
+                            fontSize: 36
+                        ),)
+                    ),
+                    Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+                        child: Text(AppLocalizations.of(context)!.homepageDescription, style: GoogleFonts.raleway(
+                            textStyle: Theme.of(context).textTheme.labelSmall,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 14
+                        ),)
+                    ),
+                  ],
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(right: 20),

@@ -1,6 +1,7 @@
 import 'package:ai_chat/MainScreen.dart';
 import 'package:ai_chat/models/AppSettings.dart';
 import 'package:ai_chat/providers/SettingsProvider.dart';
+import 'package:ai_chat/providers/UserProvider.dart';
 import 'package:ai_chat/views/auth/LoginScreen.view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -22,12 +23,20 @@ class _SplashScreenState extends State<SplashScreen> {
   AppSettings? appSettings;
   bool isAuthenticated = false;
   SettingsProvider? _settingsProvider;
+  UserProvider? _userProvider;
 
   @override
   void initState() {
     auth = FirebaseAuth.instance;
     user = auth?.currentUser;
     _settingsProvider = context.read<SettingsProvider>();
+    _userProvider = context.read<UserProvider>();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        _userProvider?.setFirebaseAuth(null);
+      }
+    });
 
     _initApp();
 

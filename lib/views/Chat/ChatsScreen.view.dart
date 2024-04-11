@@ -87,7 +87,11 @@ class _ChatsScreenState extends State<ChatsScreen> {
   Future<void> _deleteChat(ChatData? chatData) async {
     for (var message in chatData!.messages) {
       for (var image in message.images) {
-        await File(image).delete();
+        try {
+          await File(image).delete();
+        } catch (e) {
+          return;
+        }
       }
     }
 
@@ -96,8 +100,8 @@ class _ChatsScreenState extends State<ChatsScreen> {
         context: context,
         type: ToastificationType.success,
         style: ToastificationStyle.flatColored,
-        title: Text("Başarılı", style: GoogleFonts.raleway(fontWeight: FontWeight.w700),),
-        description: Text("Sohbet kaydı başarıyla silindi!", style: GoogleFonts.raleway()),
+        title: Text(AppLocalizations.of(context)!.chatsDeleteSuccessTitle, style: GoogleFonts.raleway(fontWeight: FontWeight.w700),),
+        description: Text(AppLocalizations.of(context)!.chatsDeleteSuccessMessage, style: GoogleFonts.raleway()),
         alignment: Alignment.topCenter,
         autoCloseDuration: const Duration(seconds: 4),
       );
@@ -108,8 +112,8 @@ class _ChatsScreenState extends State<ChatsScreen> {
         context: context,
         type: ToastificationType.error,
         style: ToastificationStyle.flatColored,
-        title: Text("Hata", style: GoogleFonts.raleway(fontWeight: FontWeight.w700),),
-        description: Text("Sohbet kaydı silinirken hata oluştu!", style: GoogleFonts.raleway()),
+        title: Text(AppLocalizations.of(context)!.chatsDeleteErrorTitle, style: GoogleFonts.raleway(fontWeight: FontWeight.w700),),
+        description: Text(AppLocalizations.of(context)!.chatsDeleteErrorMessage, style: GoogleFonts.raleway()),
         alignment: Alignment.topCenter,
         autoCloseDuration: const Duration(seconds: 4),
       );
@@ -158,7 +162,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
               )
             ],
           ),
-          chatsLoading ? Padding(
+          chatsLoading ? const Padding(
             padding: EdgeInsets.symmetric(vertical: 40),
             child: Center(
               child: SizedBox(
@@ -189,7 +193,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
                       onDeleteButtonTap: () {
                         _deleteChat(chats?[index]);
                       },
-                      title: "Sohbetim ${index + 1}",
+                      title: "${AppLocalizations.of(context)!.chatsMyChat} ${index + 1}",
                       description: chats?[index].messages.first.message.toString() ?? "",
                       date: chats?[index].lastModifiedDate ?? "",
                     );

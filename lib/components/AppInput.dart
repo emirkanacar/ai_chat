@@ -13,7 +13,8 @@ class AppInput extends StatelessWidget {
     this.readOnly,
     this.isDense,
     this.contentPadding,
-    this.maxLines
+    this.maxLines,
+    this.obscureText
   }) : super(key: key);
 
   final TextEditingController? controller;
@@ -24,6 +25,7 @@ class AppInput extends StatelessWidget {
   final bool? isDense;
   final EdgeInsetsGeometry? contentPadding;
   final int? maxLines;
+  final bool? obscureText;
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +35,7 @@ class AppInput extends StatelessWidget {
       controller: controller,
       readOnly: readOnly ?? false,
       maxLines: maxLines ?? 1,
+      obscureText: obscureText ?? false,
       decoration: InputDecoration(
           filled: filled,
           isDense: isDense,

@@ -26,6 +26,7 @@ class ChatListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SettingsProvider? _settingsProvider = context.watch<SettingsProvider>();
+    Jiffy.setLocale(_settingsProvider.appSettings?.language ?? "tr");
 
     return Container(
       margin: EdgeInsets.only(top: 4, bottom: 4, right: 4, left: 4),
