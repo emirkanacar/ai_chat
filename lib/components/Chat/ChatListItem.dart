@@ -4,6 +4,7 @@ import 'package:icons_plus/icons_plus.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:provider/provider.dart';
 
+import '../../helpers/functions.dart';
 import '../../providers/SettingsProvider.dart';
 import '../ButtonWithIcon.dart';
 
@@ -50,7 +51,7 @@ class ChatListItem extends StatelessWidget {
                       Text(title,
                           style: GoogleFonts.raleway(
                               fontWeight: FontWeight.w700,
-                              fontSize: 16
+                              fontSize: getFontSize(16, context).toDouble()
                           ),
                           overflow: TextOverflow.clip
                       ),
@@ -58,7 +59,7 @@ class ChatListItem extends StatelessWidget {
                         style: GoogleFonts.raleway(
                           textStyle: Theme.of(context).textTheme.labelSmall,
                           fontWeight: FontWeight.w500,
-                          fontSize: 14,
+                          fontSize: getFontSize(14, context).toDouble(),
                         ),
                         maxLines: 2,
                         overflow: TextOverflow.clip,
@@ -66,7 +67,7 @@ class ChatListItem extends StatelessWidget {
                       Text(Jiffy.parse(date).fromNow(), style: GoogleFonts.raleway(
                           textStyle: Theme.of(context).textTheme.bodySmall,
                           fontWeight: FontWeight.w500,
-                          fontSize: 13
+                          fontSize: getFontSize(13, context).toDouble()
                       ),)
                     ],
                   ),

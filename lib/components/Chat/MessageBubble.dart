@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+import '../../helpers/functions.dart';
 import '../../providers/SettingsProvider.dart';
 
 class MessageBubble extends StatelessWidget {
@@ -68,7 +69,7 @@ class MessageBubble extends StatelessWidget {
                   messageText,
                   overflow: TextOverflow.fade,
                   style: GoogleFonts.raleway(
-                    fontSize: 16,
+                    fontSize: getFontSize(16, context).toDouble(),
                     color: Colors.white,
                   ),
                   textAlign: TextAlign.end,
@@ -142,7 +143,7 @@ class MessageBubble extends StatelessWidget {
                         h1: GoogleFonts.raleway(),
                         h2: GoogleFonts.raleway(),
                         a: GoogleFonts.raleway(),
-                        p: GoogleFonts.raleway(fontSize: 16),
+                        p: GoogleFonts.raleway(fontSize: getFontSize(16, context).toDouble()),
                       ),
                     ),
                   )

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import '../helpers/functions.dart';
 import '../providers/SettingsProvider.dart';
 
 class PromptBox extends StatelessWidget {
@@ -37,7 +38,7 @@ class PromptBox extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
               child: Text(promptText, style: GoogleFonts.raleway(
                   fontWeight: FontWeight.w500,
-                  fontSize: 12
+                  fontSize: getFontSize(12, context).toDouble()
               ),
               ),
             ),

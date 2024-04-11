@@ -9,6 +9,7 @@ import 'package:toastification/toastification.dart';
 import '../../components/AppWrapper.dart';
 import '../../components/ButtonWithIcon.dart';
 import '../../components/Chat/ChatListItem.dart';
+import '../../helpers/functions.dart';
 import '../../models/Chat/ChatMessageModel.dart';
 import '../../models/hive/ChatDataModel.dart';
 import 'ChatScreen.view.dart';
@@ -138,7 +139,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
                       padding: EdgeInsets.only(top: 0, right: 20, left: 20),
                       child: Text(AppLocalizations.of(context)!.chatsTitle, style: GoogleFonts.raleway(
                           fontWeight: FontWeight.w900,
-                          fontSize: 36
+                          fontSize: getFontSize(36, context).toDouble()
                       ),)
                   ),
                   Padding(
@@ -146,7 +147,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
                       child: Text(AppLocalizations.of(context)!.chatsDescription, style: GoogleFonts.raleway(
                           textStyle: Theme.of(context).textTheme.labelSmall,
                           fontWeight: FontWeight.w500,
-                          fontSize: 14
+                          fontSize: getFontSize(14, context).toDouble()
                       ),)
                   ),
                 ],

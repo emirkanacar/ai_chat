@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:provider/provider.dart';
 
+import '../helpers/functions.dart';
 import '../providers/SettingsProvider.dart';
 
 class SettingsBox extends StatelessWidget {
@@ -70,7 +71,7 @@ class SettingsBox extends StatelessWidget {
                                 padding: EdgeInsets.only(left: 10, right: 20, top: 0, bottom: 0),
                                 child: Text(title, style: GoogleFonts.raleway(
                                     fontWeight: FontWeight.w600,
-                                    fontSize: 16
+                                    fontSize: getFontSize(16, context).toDouble()
                                 ),)
                             ),
                             Padding(
@@ -78,7 +79,7 @@ class SettingsBox extends StatelessWidget {
                                 child: Text(description, style: GoogleFonts.raleway(
                                   textStyle: Theme.of(context).textTheme.labelSmall,
                                   fontWeight: FontWeight.w500,
-                                  fontSize: 14,
+                                  fontSize: getFontSize(14, context).toDouble(),
                                 ),)
                             ),
                           ],

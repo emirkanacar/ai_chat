@@ -212,7 +212,7 @@ class _NewChatScreenState extends State<ChatScreen> {
                           style: GoogleFonts.raleway(
                             textStyle: Theme.of(context).textTheme.bodyMedium,
                             fontWeight: FontWeight.w500,
-                            fontSize: 16
+                            fontSize: getFontSize(16, context).toDouble()
                           ),
                         ),
                         onTap: () async {
@@ -230,7 +230,7 @@ class _NewChatScreenState extends State<ChatScreen> {
                           style: GoogleFonts.raleway(
                             textStyle: Theme.of(context).textTheme.bodyMedium,
                             fontWeight: FontWeight.w500,
-                            fontSize: 16
+                            fontSize: getFontSize(16, context).toDouble()
                           ),
                         ),
                         onTap: () async {
@@ -259,7 +259,7 @@ class _NewChatScreenState extends State<ChatScreen> {
                           style: GoogleFonts.raleway(
                             textStyle: Theme.of(context).textTheme.bodyMedium,
                             fontWeight: FontWeight.w500,
-                            fontSize: 16
+                            fontSize: getFontSize(16, context).toDouble()
                           ),
                         ),
                       ),
@@ -355,7 +355,7 @@ class _NewChatScreenState extends State<ChatScreen> {
                                 padding: EdgeInsets.only(left: 10, right: 20, top: 10, bottom: 0),
                                 child: Text("AI Chat", style: GoogleFonts.raleway(
                                     fontWeight: FontWeight.w700,
-                                    fontSize: 20,
+                                    fontSize: getFontSize(20, context).toDouble(),
                                     textStyle: Theme.of(context).textTheme.bodyLarge
                                 ),)
                             ),
@@ -363,7 +363,7 @@ class _NewChatScreenState extends State<ChatScreen> {
                                 padding: EdgeInsets.only(left: 10, right: 20, top: 0),
                                 child: Text(isCurrentNew ? "New Chat" : "Messages", style: GoogleFonts.raleway(
                                   fontWeight: FontWeight.w400,
-                                  fontSize: 15,
+                                  fontSize: getFontSize(15, context).toDouble(),
                                   textStyle: Theme.of(context).textTheme.labelSmall
                                 ),)
                             ),

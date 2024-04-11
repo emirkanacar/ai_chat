@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import '../helpers/functions.dart';
+
 class AppInput extends StatelessWidget {
   const AppInput({
     Key? key,
@@ -63,7 +65,8 @@ class AppInput extends StatelessWidget {
           )
       ),
       style: GoogleFonts.raleway(
-        color: _settingsProvider.appSettings?.theme == "dark" ?  Colors.white : Color(0xFF1f1f1f)
+        color: _settingsProvider.appSettings?.theme == "dark" ?  Colors.white : Color(0xFF1f1f1f),
+        fontSize: getFontSize(16, context).toDouble()
       ),
     );
   }

@@ -12,6 +12,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../helpers/functions.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -78,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         padding: EdgeInsets.only(top: 20, right: 20, left: 20),
                         child: Text(AppLocalizations.of(context)!.homepageTitle, style: GoogleFonts.raleway(
                             fontWeight: FontWeight.w900,
-                            fontSize: 36
+                            fontSize: getFontSize(36, context).toDouble()
                         ),)
                     ),
                     Padding(
@@ -86,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Text(AppLocalizations.of(context)!.homepageDescription, style: GoogleFonts.raleway(
                             textStyle: Theme.of(context).textTheme.labelSmall,
                             fontWeight: FontWeight.w400,
-                            fontSize: 14
+                            fontSize: getFontSize(14, context).toDouble()
                         ),)
                     ),
                   ],

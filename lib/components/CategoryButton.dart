@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import '../helpers/functions.dart';
 import '../providers/SettingsProvider.dart';
 
 class CategoryButton extends StatelessWidget {
@@ -35,7 +36,7 @@ class CategoryButton extends StatelessWidget {
             padding: EdgeInsets.only(left: 10, right: 10, top: 4),
             child: Text(buttonText, style: GoogleFonts.raleway(
                 fontWeight: FontWeight.w500,
-                fontSize: 14,
+                fontSize: getFontSize(14, context).toDouble(),
                 color: isSelected ? const Color(0xff3f69ef) : _settingsProvider.appSettings?.theme == "dark" ? Colors.white : Colors.black.withOpacity(0.7)
             ),),
           )
