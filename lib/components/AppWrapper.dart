@@ -43,7 +43,10 @@ class _AppWrapperState extends State<AppWrapper> {
             gradient: LinearGradient(
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
-              colors: _settingsProvider?.appSettings?.theme == "dark" ? AppThemes.darkBackground : AppThemes.lightBackground
+              colors: [
+                Theme.of(context).colorScheme.primary,
+                Theme.of(context).colorScheme.secondary,
+              ]
             )
         ),
         child: SafeArea(

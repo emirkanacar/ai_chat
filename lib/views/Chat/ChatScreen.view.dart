@@ -22,6 +22,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:toastification/toastification.dart';
 import 'package:uuid/uuid.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({
@@ -99,6 +100,45 @@ class _NewChatScreenState extends State<ChatScreen> {
     chatDataBox = await Hive.openBox<ChatData>("chatMessages");
   }
 
+  Future<void> _deleteChat() async {
+    for (var message in chatMessages) {
+      for (var image in message.images) {
+        try {
+          await File(image).delete();
+        } catch (e) {
+          return;
+        }
+      }
+    }
+
+    chatDataBox.delete(chatId).then((value) async {
+      toastification.show(
+        context: context,
+        type: ToastificationType.success,
+        style: ToastificationStyle.flatColored,
+        title: Text(AppLocalizations.of(context)!.chatsDeleteSuccessTitle, style: GoogleFonts.raleway(fontWeight: FontWeight.w700),),
+        description: Text(AppLocalizations.of(context)!.chatsDeleteSuccessMessage, style: GoogleFonts.raleway()),
+        alignment: Alignment.topCenter,
+        autoCloseDuration: const Duration(seconds: 4),
+      );
+
+      Navigator.pop(context);
+    }).catchError((error) async {
+      toastification.show(
+        context: context,
+        type: ToastificationType.error,
+        style: ToastificationStyle.flatColored,
+        title: Text(AppLocalizations.of(context)!.chatsDeleteErrorTitle, style: GoogleFonts.raleway(fontWeight: FontWeight.w700),),
+        description: Text(AppLocalizations.of(context)!.chatsDeleteErrorMessage, style: GoogleFonts.raleway()),
+        alignment: Alignment.topCenter,
+        autoCloseDuration: const Duration(seconds: 4),
+      );
+
+      Navigator.pop(context);
+    });
+  }
+
+
   @override
   void dispose() {
     super.dispose();
@@ -134,7 +174,7 @@ class _NewChatScreenState extends State<ChatScreen> {
         scrollBottom();
       }).catchError((onError) {
         setState(() {
-          chatMessages.add(ChatMessage(id: Uuid().toString(), message: "Merhaba, cevap oluştulurken hata oluştu! Hata: ${onError.toString()}", isUserMessage: false, date: DateTime.now().toIso8601String(), images: []));
+          chatMessages.add(ChatMessage(id: Uuid().toString(), message: "${AppLocalizations.of(context)!.chatScreenErrorMessage} ${onError.toString()}", isUserMessage: false, date: DateTime.now().toIso8601String(), images: []));
           waitingResponse = false;
           chatDataBox.put(chatId, ChatData(chatID: chatId, username: _auth.currentUser?.email ?? "null", AIType: selectedModel, messages: chatMessages, lastModifiedDate: DateTime.now().toIso8601String()));
         });
@@ -161,7 +201,7 @@ class _NewChatScreenState extends State<ChatScreen> {
         scrollBottom();
       }).catchError((onError) {
         setState(() {
-          chatMessages.add(ChatMessage(id: Uuid().toString(), message: "Merhaba, cevap oluştulurken hata oluştu! Hata: ${onError.toString()}", isUserMessage: false, date: DateTime.now().toIso8601String(), images: []));
+          chatMessages.add(ChatMessage(id: Uuid().toString(), message: "${AppLocalizations.of(context)!.chatScreenErrorMessage} ${onError.toString()}", isUserMessage: false, date: DateTime.now().toIso8601String(), images: []));
           waitingResponse = false;
           chatDataBox.put(chatId, ChatData(chatID: chatId, username: _auth.currentUser?.email ?? "null", AIType: selectedModel, messages: chatMessages, lastModifiedDate: DateTime.now().toIso8601String()));
           selectedImages.clear();
@@ -196,7 +236,7 @@ class _NewChatScreenState extends State<ChatScreen> {
               curve: Curves.easeOut,
               child: FractionallySizedBox(
                 widthFactor: 1,
-                heightFactor: 0.3,
+                heightFactor: 0.2,
                 child: Container(
                   padding: EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
                   child: Column(
@@ -208,7 +248,7 @@ class _NewChatScreenState extends State<ChatScreen> {
                           child: Icon(AntDesign.camera_outline, size: 22, color: Colors.white,),
                         ),
                         title: Text(
-                          "Kamera ile görüntü ekle!",
+                          AppLocalizations.of(context)!.chatScreenAddImageCamera,
                           style: GoogleFonts.raleway(
                             textStyle: Theme.of(context).textTheme.bodyMedium,
                             fontWeight: FontWeight.w500,
@@ -226,7 +266,7 @@ class _NewChatScreenState extends State<ChatScreen> {
                           child: Icon(HeroIcons.photo, size: 22, color: Colors.white,),
                         ),
                         title: Text(
-                          "Galeriden görüntü ekle!",
+                          AppLocalizations.of(context)!.chatScreenAddImageGallery,
                           style: GoogleFonts.raleway(
                             textStyle: Theme.of(context).textTheme.bodyMedium,
                             fontWeight: FontWeight.w500,
@@ -247,21 +287,6 @@ class _NewChatScreenState extends State<ChatScreen> {
                             }
                           });
                         },
-                      ),
-                      Divider(color: Theme.of(context).dividerColor),
-                      ListTile(
-                        leading: CircleAvatar(
-                          backgroundColor: Color(0xFF282828),
-                          child: Icon(AntDesign.file_outline, size: 22, color: Colors.white,),
-                        ),
-                        title: Text(
-                          "Dosyalardan görüntü ekle!",
-                          style: GoogleFonts.raleway(
-                            textStyle: Theme.of(context).textTheme.bodyMedium,
-                            fontWeight: FontWeight.w500,
-                            fontSize: getFontSize(16, context).toDouble()
-                          ),
-                        ),
                       ),
                     ],
                   ),
@@ -315,7 +340,7 @@ class _NewChatScreenState extends State<ChatScreen> {
                                       padding: EdgeInsets.only(right: 10),
                                       child: Icon(HeroIcons.trash, size: 18, color: _settingsProvider?.appSettings?.theme == "dark" ? Colors.white : Colors.black),
                                     ),
-                                    Text("Sohbeti Sil", style: GoogleFonts.raleway(
+                                    Text(AppLocalizations.of(context)!.chatScreenDeleteChat, style: GoogleFonts.raleway(
                                       color: _settingsProvider?.appSettings?.theme == "dark" ? Colors.white : Colors.black
                                     ),)
                                   ],
@@ -323,7 +348,11 @@ class _NewChatScreenState extends State<ChatScreen> {
                               ),
                             ],
                             onChanged: (value) {
-
+                              if (chatMessages.isEmpty) {
+                                Navigator.pop(context);
+                              } else {
+                                _deleteChat();
+                              }
                             },
                             dropdownStyleData: DropdownStyleData(
                               width: 160,
@@ -361,7 +390,7 @@ class _NewChatScreenState extends State<ChatScreen> {
                             ),
                             Padding(
                                 padding: EdgeInsets.only(left: 10, right: 20, top: 0),
-                                child: Text(isCurrentNew ? "New Chat" : "Messages", style: GoogleFonts.raleway(
+                                child: Text(isCurrentNew ? AppLocalizations.of(context)!.chatScreenNewChatTitle : AppLocalizations.of(context)!.chatScreenMessagesTitle, style: GoogleFonts.raleway(
                                   fontWeight: FontWeight.w400,
                                   fontSize: getFontSize(15, context).toDouble(),
                                   textStyle: Theme.of(context).textTheme.labelSmall
@@ -469,8 +498,8 @@ class _NewChatScreenState extends State<ChatScreen> {
                                 context: context,
                                 type: ToastificationType.info,
                                 style: ToastificationStyle.flatColored,
-                                title: Text("Bilgilendirme", style: GoogleFonts.raleway(fontWeight: FontWeight.w700),),
-                                description: Text("Görüntüler başarıyla kaldırıldı!", style: GoogleFonts.raleway()),
+                                title: Text(AppLocalizations.of(context)!.chatScreenRemoveImageTitle, style: GoogleFonts.raleway(fontWeight: FontWeight.w700),),
+                                description: Text(AppLocalizations.of(context)!.chatScreenRemoveImageMessage, style: GoogleFonts.raleway()),
                                 alignment: Alignment.topCenter,
                                 autoCloseDuration: const Duration(seconds: 3),
                               );
@@ -486,7 +515,7 @@ class _NewChatScreenState extends State<ChatScreen> {
                           Padding(
                             padding: EdgeInsets.only(left: 10),
                             child: Text(
-                              "${selectedImages.length} görüntü seçildi!",
+                              "${selectedImages.length} ${AppLocalizations.of(context)!.chatScreenImageSelectedLabel}",
                               style: GoogleFonts.raleway(
                                 textStyle: Theme.of(context).textTheme.labelSmall
                               ),
@@ -514,7 +543,7 @@ class _NewChatScreenState extends State<ChatScreen> {
                                 maxLines: 1,
                                 isDense: true,
                                 contentPadding: EdgeInsets.only(top: 10, bottom: 10, right: 20, left: 20),
-                                hintText: "Message...",
+                                hintText: AppLocalizations.of(context)!.chatScreenMessageInput,
                               ),
                             ),
                           ),

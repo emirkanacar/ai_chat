@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
@@ -25,6 +26,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
   Box<ChatData>? chatDataBox;
   bool chatsLoading = true;
   List<ChatData>? chats;
+  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
   @override
   void initState() {
@@ -43,6 +45,9 @@ class _ChatsScreenState extends State<ChatsScreen> {
         return DateTime.parse(b.lastModifiedDate).compareTo(DateTime.parse(a.lastModifiedDate));
       });
 
+      var filtered = chats?.where((element) => element.username == firebaseAuth.currentUser?.email).toList();
+
+      chats = filtered;
       chatsLoading = false;
     });
   }

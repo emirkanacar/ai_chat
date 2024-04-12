@@ -1,7 +1,6 @@
 import 'package:ai_chat/components/AppButton.dart';
 import 'package:ai_chat/helpers/functions.dart';
 import 'package:ai_chat/providers/SettingsProvider.dart';
-import 'package:ai_chat/providers/UserProvider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,6 +13,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../components/AppInput.dart';
 import '../components/AppWrapper.dart';
 import '../components/SettingsBox.dart';
+import 'auth/LoginScreen.view.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -38,6 +38,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
   double slidingValue = 16;
 
   bool actionIsLoading = false;
+  bool isNameLoading = false;
+  bool isPasswordLoading = false;
+  bool reAuthenticateLoading = false;
 
   @override
   void initState() {
@@ -80,7 +83,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               padding: EdgeInsets.only(left: 10, right: 20, top: 10, bottom: 0),
                               child: Text(firebaseAuth?.currentUser?.displayName ?? "", style: GoogleFonts.raleway(
                                   fontWeight: FontWeight.w700,
-                                  fontSize: 20
+                                  fontSize: getFontSize(20, context).toDouble()
                               ),)
                           ),
                           Padding(
@@ -88,7 +91,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               child: Text(firebaseAuth?.currentUser?.email ?? "", style: GoogleFonts.raleway(
                                 textStyle: Theme.of(context).textTheme.labelSmall,
                                 fontWeight: FontWeight.w400,
-                                fontSize: 15,
+                                fontSize: getFontSize(15, context).toDouble(),
                               ),)
                           ),
                         ],
@@ -100,7 +103,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               padding: EdgeInsets.only(left: 10, right: 20, top: 30),
                               child: Text(AppLocalizations.of(context)!.settingsPagePersonalInfoTitle, style: GoogleFonts.raleway(
                                 fontWeight: FontWeight.w700,
-                                fontSize: 17,
+                                fontSize: getFontSize(17, context).toDouble(),
                               ), textAlign: TextAlign.start,)
                           ),
                           Padding(
@@ -108,7 +111,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               child: Text(AppLocalizations.of(context)!.settingsPageNameSurname, style: GoogleFonts.raleway(
                                 fontWeight: FontWeight.w600,
                                 textStyle: Theme.of(context).textTheme.labelSmall,
-                                fontSize: 15,
+                                fontSize: getFontSize(15, context).toDouble(),
                               ), textAlign: TextAlign.start,)
                           ),
                           Padding(
@@ -125,7 +128,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               child: Text(AppLocalizations.of(context)!.settingsPageEmail, style: GoogleFonts.raleway(
                                 fontWeight: FontWeight.w600,
                                 textStyle: Theme.of(context).textTheme.labelSmall,
-                                fontSize: 15,
+                                fontSize: getFontSize(15, context).toDouble(),
                               ), textAlign: TextAlign.start,)
                           ),
                           Padding(
@@ -143,7 +146,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               child: Text(AppLocalizations.of(context)!.settingsPageEmailDescription, style: GoogleFonts.raleway(
                                 fontWeight: FontWeight.w500,
                                 textStyle: Theme.of(context).textTheme.labelSmall,
-                                fontSize: 14,
+                                fontSize: getFontSize(14, context).toDouble(),
                               ), textAlign: TextAlign.start,)
                           ),
                           Padding(
@@ -151,11 +154,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             child: AppButton(
                               buttonText: AppLocalizations.of(context)!.settingsPageSaveButton,
                               onPressed: () {
+                                modalSetState(() {
+                                  isNameLoading = true;
+                                });
+
                                 if (_firstNameController.value.text.length > 3) {
                                   firebaseAuth?.currentUser?.updateDisplayName(_firstNameController.value.text).then((value) {
 
-                                    setState(() {
+                                    modalSetState(() {
                                       firebaseAuth?.currentUser?.reload();
+                                      isNameLoading = false;
                                     });
 
                                     Navigator.pop(context);
@@ -179,6 +187,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                       alignment: Alignment.topCenter,
                                       autoCloseDuration: const Duration(seconds: 4),
                                     );
+
+                                    modalSetState(() {
+                                      isNameLoading = false;
+                                    });
                                   });
                                 } else {
                                   toastification.show(
@@ -190,9 +202,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                     alignment: Alignment.topCenter,
                                     autoCloseDuration: const Duration(seconds: 4),
                                   );
+
+                                  modalSetState(() {
+                                    isNameLoading = false;
+                                  });
                                 }
                               },
-                              isLoading: false,
+                              isLoading: isNameLoading,
                             ),
                           ),
                         ],
@@ -204,7 +220,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               padding: EdgeInsets.only(left: 10, right: 20, top: 30),
                               child: Text(AppLocalizations.of(context)!.settingsPageSecurityInfoTitle, style: GoogleFonts.raleway(
                                 fontWeight: FontWeight.w700,
-                                fontSize: 17,
+                                fontSize: getFontSize(17, context).toDouble(),
                               ), textAlign: TextAlign.start,)
                           ),
                           Padding(
@@ -222,7 +238,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               child: Text(AppLocalizations.of(context)!.settingsPageNewPasswordAgain, style: GoogleFonts.raleway(
                                 fontWeight: FontWeight.w600,
                                 textStyle: Theme.of(context).textTheme.labelSmall,
-                                fontSize: 15,
+                                fontSize: getFontSize(15, context).toDouble(),
                               ), textAlign: TextAlign.start,)
                           ),
                           Padding(
@@ -237,15 +253,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           ),
                           Padding(
                             padding: EdgeInsets.only(left: 10, right: 10, top: 20),
-                            child: OutlinedButton(
-                              style: OutlinedButton.styleFrom(
-                                  backgroundColor: Color(0xFF3b61dc),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  side: BorderSide(width: 0, color: Color(0xFF3b61dc))
-                              ),
+                            child: AppButton(
+                              buttonText: AppLocalizations.of(context)!.settingsPageSaveButton,
                               onPressed: () {
+                                modalSetState(() {
+                                  isPasswordLoading = true;
+                                });
+
                                 if (_newPassword.value.text != _newPasswordAgain.value.text) {
                                   toastification.show(
                                     context: context,
@@ -256,6 +270,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                     alignment: Alignment.topCenter,
                                     autoCloseDuration: const Duration(seconds: 4),
                                   );
+
+                                  modalSetState(() {
+                                    isPasswordLoading = false;
+                                  });
                                 }else if (_newPassword.value.text.length < 8) {
                                   toastification.show(
                                     context: context,
@@ -266,11 +284,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                     alignment: Alignment.topCenter,
                                     autoCloseDuration: const Duration(seconds: 4),
                                   );
+
+                                  modalSetState(() {
+                                    isPasswordLoading = false;
+                                  });
                                 } else {
                                   firebaseAuth?.currentUser?.updatePassword(_newPassword.value.text).then((value) {
 
-                                    setState(() {
+                                    modalSetState(() {
                                       firebaseAuth?.currentUser?.reload();
+                                      isPasswordLoading = true;
                                     });
 
                                     _newPassword.clear();
@@ -301,6 +324,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
                                       _showReAuthenticateUserModal();
 
+                                      modalSetState(() {
+                                        isPasswordLoading = true;
+                                      });
+
                                     } else {
                                       toastification.show(
                                         context: context,
@@ -311,24 +338,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                         alignment: Alignment.topCenter,
                                         autoCloseDuration: const Duration(seconds: 4),
                                       );
+
+                                      modalSetState(() {
+                                        isPasswordLoading = true;
+                                      });
                                     }
                                   });
                                 }
                               },
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(vertical: 10),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Text(AppLocalizations.of(context)!.settingsPageSaveButton, style: GoogleFonts.poppins(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 15
-                                    ),)
-                                  ],
-                                ),
-                              ),
+                              isLoading: isPasswordLoading,
                             ),
                           ),
                         ],
@@ -368,7 +386,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               padding: EdgeInsets.only(top: 0, right: 20, left: 10),
                               child: Text("${AppLocalizations.of(context)!.settingsReAuthenticateTitle}, ${firebaseAuth?.currentUser?.displayName}", style: GoogleFonts.raleway(
                                   fontWeight: FontWeight.w500,
-                                  fontSize: 22
+                                  fontSize: getFontSize(22, context).toDouble()
                               ),)
                           ),
                           Padding(
@@ -376,7 +394,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               child: Text(AppLocalizations.of(context)!.settingsReAuthenticateDesc, style: GoogleFonts.raleway(
                                   textStyle: Theme.of(context).textTheme.labelSmall,
                                   fontWeight: FontWeight.w500,
-                                  fontSize: 14
+                                  fontSize: getFontSize(14, context).toDouble()
                               ),)
                           ),
                           Padding(
@@ -384,7 +402,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               child: Text(AppLocalizations.of(context)!.settingsPageEmail, style: GoogleFonts.raleway(
                                 fontWeight: FontWeight.w600,
                                 textStyle: Theme.of(context).textTheme.labelSmall,
-                                fontSize: 15,
+                                fontSize: getFontSize(15, context).toDouble(),
                               ), textAlign: TextAlign.start,)
                           ),
                           Padding(
@@ -401,7 +419,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               child: Text(AppLocalizations.of(context)!.settingsReAuthenticatePassword, style: GoogleFonts.raleway(
                                 fontWeight: FontWeight.w600,
                                 textStyle: Theme.of(context).textTheme.labelSmall,
-                                fontSize: 15,
+                                fontSize: getFontSize(15, context).toDouble(),
                               ), textAlign: TextAlign.start,)
                           ),
                           Padding(
@@ -415,61 +433,54 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(left: 10, right: 10, top: 20),
-                            child: OutlinedButton(
-                              style: OutlinedButton.styleFrom(
-                                  backgroundColor: Color(0xFF3b61dc),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  side: BorderSide(width: 0, color: Color(0xFF3b61dc))
-                              ),
+                            padding: EdgeInsets.only(),
+                            child: AppButton(
+                              buttonText: AppLocalizations.of(context)!.settingsReAuthenticateButton,
                               onPressed: () {
-                                AuthCredential credentials = EmailAuthProvider.credential(email: _loginEmail.value.text, password: _loginPassword.value.text);
+                                  modalSetState(() {
+                                    reAuthenticateLoading = true;
+                                  });
 
-                                firebaseAuth?.currentUser?.reauthenticateWithCredential(credentials).then((value) {
-                                  Navigator.pop(context);
+                                  AuthCredential credentials = EmailAuthProvider.credential(email: _loginEmail.value.text, password: _loginPassword.value.text);
 
-                                  _loginEmail.clear();
-                                  _loginPassword.clear();
+                                  firebaseAuth?.currentUser?.reauthenticateWithCredential(credentials).then((value) {
+                                    Navigator.pop(context);
 
-                                  toastification.show(
-                                    context: context,
-                                    type: ToastificationType.success,
-                                    style: ToastificationStyle.flatColored,
-                                    title: Text(AppLocalizations.of(context)!.settingsReAuthenticateSuccess, style: GoogleFonts.raleway(fontWeight: FontWeight.w700),),
-                                    description: Text(AppLocalizations.of(context)!.settingsReAuthenticateSuccessMessage, style: GoogleFonts.raleway()),
-                                    alignment: Alignment.topCenter,
-                                    autoCloseDuration: const Duration(seconds: 4),
-                                  );
-                                }).catchError((error) {
-                                  toastification.show(
-                                    context: context,
-                                    type: ToastificationType.error,
-                                    style: ToastificationStyle.flatColored,
-                                    title: Text(AppLocalizations.of(context)!.settingsReAuthenticateError, style: GoogleFonts.raleway(fontWeight: FontWeight.w700),),
-                                    description: Text(AppLocalizations.of(context)!.settingsReAuthenticateErrorMessage, style: GoogleFonts.raleway()),
-                                    alignment: Alignment.topCenter,
-                                    autoCloseDuration: const Duration(seconds: 4),
-                                  );
-                                });
-                              },
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(vertical: 10),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Text(AppLocalizations.of(context)!.settingsReAuthenticateButton, style: GoogleFonts.poppins(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 15
-                                    ),)
-                                  ],
-                                ),
-                              ),
+                                    _loginEmail.clear();
+                                    _loginPassword.clear();
+
+                                    modalSetState(() {
+                                      reAuthenticateLoading = false;
+                                    });
+
+                                    toastification.show(
+                                      context: context,
+                                      type: ToastificationType.success,
+                                      style: ToastificationStyle.flatColored,
+                                      title: Text(AppLocalizations.of(context)!.settingsReAuthenticateSuccess, style: GoogleFonts.raleway(fontWeight: FontWeight.w700),),
+                                      description: Text(AppLocalizations.of(context)!.settingsReAuthenticateSuccessMessage, style: GoogleFonts.raleway()),
+                                      alignment: Alignment.topCenter,
+                                      autoCloseDuration: const Duration(seconds: 4),
+                                    );
+                                  }).catchError((error) {
+                                    toastification.show(
+                                      context: context,
+                                      type: ToastificationType.error,
+                                      style: ToastificationStyle.flatColored,
+                                      title: Text(AppLocalizations.of(context)!.settingsReAuthenticateError, style: GoogleFonts.raleway(fontWeight: FontWeight.w700),),
+                                      description: Text(AppLocalizations.of(context)!.settingsReAuthenticateErrorMessage, style: GoogleFonts.raleway()),
+                                      alignment: Alignment.topCenter,
+                                      autoCloseDuration: const Duration(seconds: 4),
+                                    );
+
+                                    modalSetState(() {
+                                      reAuthenticateLoading = false;
+                                    });
+                                  });
+                                },
+                              isLoading: reAuthenticateLoading,
                             ),
-                          ),
+                          )
                         ],
                       ),
                     ],
@@ -505,7 +516,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           padding: EdgeInsets.only(left: 10, right: 20, top: 10, bottom: 0),
                           child: Text(AppLocalizations.of(context)!.settingsPageThemeTitle, style: GoogleFonts.raleway(
                               fontWeight: FontWeight.w700,
-                              fontSize: 20,
+                              fontSize: getFontSize(20, context).toDouble(),
                               textStyle: Theme.of(context).textTheme.bodyLarge
                           ),)
                       ),
@@ -513,7 +524,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           padding: EdgeInsets.only(left: 10, right: 20, top: 0),
                           child: Text(AppLocalizations.of(context)!.settingsPageThemeDescription, style: GoogleFonts.raleway(
                               fontWeight: FontWeight.w400,
-                              fontSize: 15,
+                              fontSize: getFontSize(15, context).toDouble(),
                               textStyle: Theme.of(context).textTheme.labelSmall
                           ),)
                       ),
@@ -522,7 +533,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         child: ToggleSwitch(
                           animate: true,
                           animationDuration: 150,
-                          fontSize: 20,
+                          fontSize: getFontSize(20, context).toDouble(),
                           minWidth: 100.0,
                           minHeight: 45.0,
                           borderWidth: 1,
@@ -530,7 +541,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           activeFgColor: _settingsProvider?.appSettings?.theme == "dark" ? Colors.black : Colors.white,
                           inactiveBgColor: Colors.transparent,
                           inactiveFgColor: _settingsProvider?.appSettings?.theme == "dark" ? Colors.white : Colors.black,
-                          customTextStyles: [GoogleFonts.raleway(fontSize: 16)],
+                          customTextStyles: [GoogleFonts.raleway(fontSize: getFontSize(16, context).toDouble())],
                           activeBgColor: [_settingsProvider?.appSettings?.theme == "dark" ? Colors.white : Colors.black],
                           initialLabelIndex: _settingsProvider?.appSettings?.theme == "dark" ? 0 : 1,
                           totalSwitches: 2,
@@ -574,7 +585,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           padding: EdgeInsets.only(left: 10, right: 20, top: 10, bottom: 0),
                           child: Text(AppLocalizations.of(context)!.settingsPageLangTitle, style: GoogleFonts.raleway(
                               fontWeight: FontWeight.w700,
-                              fontSize: 20,
+                              fontSize: getFontSize(20, context).toDouble(),
                               textStyle: Theme.of(context).textTheme.bodyLarge
                           ),)
                       ),
@@ -582,7 +593,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           padding: EdgeInsets.only(left: 10, right: 20, top: 0),
                           child: Text(AppLocalizations.of(context)!.settingsPageLangDescription, style: GoogleFonts.raleway(
                               fontWeight: FontWeight.w400,
-                              fontSize: 15,
+                              fontSize: getFontSize(15, context).toDouble(),
                               textStyle: Theme.of(context).textTheme.labelSmall
                           ),)
                       ),
@@ -591,7 +602,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         child: ToggleSwitch(
                           animate: true,
                           animationDuration: 150,
-                          fontSize: 20,
+                          fontSize: getFontSize(20, context).toDouble(),
                           minWidth: 100.0,
                           minHeight: 45.0,
                           borderWidth: 1,
@@ -599,7 +610,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           activeFgColor: _settingsProvider?.appSettings?.theme == "dark" ? Colors.black : Colors.white,
                           inactiveBgColor: Colors.transparent,
                           inactiveFgColor: _settingsProvider?.appSettings?.theme == "dark" ? Colors.white : Colors.black,
-                          customTextStyles: [GoogleFonts.raleway(fontSize: 16)],
+                          customTextStyles: [GoogleFonts.raleway(fontSize: getFontSize(16, context).toDouble())],
                           activeBgColor: [_settingsProvider?.appSettings?.theme == "dark" ? Colors.white : Colors.black],
                           initialLabelIndex: _settingsProvider?.appSettings?.language == "tr" ? 0 : 1,
                           totalSwitches: 2,
@@ -641,14 +652,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         padding: EdgeInsets.only(left: 10, right: 20, top: 10, bottom: 0),
                         child: Text(AppLocalizations.of(context)!.settingsPageFontTitle, style: GoogleFonts.raleway(
                             fontWeight: FontWeight.w700,
-                            fontSize: 20
+                            fontSize: getFontSize(20, context).toDouble()
                         ),)
                     ),
                     Padding(
                         padding: EdgeInsets.only(left: 10, right: 20, top: 0),
                         child: Text(AppLocalizations.of(context)!.settingsPageFontModalDescription, style: GoogleFonts.raleway(
                             fontWeight: FontWeight.w400,
-                            fontSize: 15,
+                            fontSize: getFontSize(15, context).toDouble(),
                             textStyle: Theme.of(context).textTheme.labelSmall
                         ),)
                     ),
@@ -677,7 +688,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                     Padding(
                       padding: EdgeInsets.only(top: 10),
-                      child: slidingValue == 14 ? Text("Küçük", style: GoogleFonts.raleway(fontSize: 20),) : slidingValue == 16 ? Text("Normal", style: GoogleFonts.raleway(fontSize: 20),) : Text("Büyük", style: GoogleFonts.raleway(fontSize: 20),)
+                      child: slidingValue == 14 ? Text(AppLocalizations.of(context)!.settingsPageFontSmaller, style: GoogleFonts.raleway(fontSize: getFontSize(20, context).toDouble()),) : slidingValue == 16 ? Text(AppLocalizations.of(context)!.settingsPageFontMedium, style: GoogleFonts.raleway(fontSize: getFontSize(20, context).toDouble()),) : Text(AppLocalizations.of(context)!.settingsPageFontLarger, style: GoogleFonts.raleway(fontSize: getFontSize(20, context).toDouble()),)
                     )
                   ],
                 ),
@@ -685,74 +696,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
           );
         });
-      },
-    );
-  }
-
-  void _showNotificationSettingsModal() {
-    showModalBottomSheet<void>(
-      backgroundColor: Theme.of(context).dialogBackgroundColor,
-      isScrollControlled: true,
-      context: context,
-      builder: (BuildContext context) {
-        return StatefulBuilder(
-          builder: (BuildContext context, StateSetter modalSetState) {
-            return FractionallySizedBox(
-              heightFactor: 0.25,
-              widthFactor: 1,
-              child: SingleChildScrollView(
-                padding: EdgeInsets.only(bottom: 40),
-                child: Container(
-                  padding: EdgeInsets.only(top: 20, left: 20, right: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Padding(
-                          padding: EdgeInsets.only(left: 10, right: 20, top: 10, bottom: 0),
-                          child: Text(AppLocalizations.of(context)!.settingsPageNotificationTitle, style: GoogleFonts.raleway(
-                              fontWeight: FontWeight.w700,
-                              fontSize: 20,
-                              textStyle: Theme.of(context).textTheme.bodyLarge
-                          ),)
-                      ),
-                      Padding(
-                          padding: EdgeInsets.only(left: 10, right: 20, top: 0),
-                          child: Text(AppLocalizations.of(context)!.settingsPageNotificationDescription, style: GoogleFonts.raleway(
-                              fontWeight: FontWeight.w400,
-                              fontSize: 15,
-                              textStyle: Theme.of(context).textTheme.labelSmall
-                          ),)
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 20),
-                        child: ToggleSwitch(
-                          animate: true,
-                          animationDuration: 150,
-                          fontSize: 20,
-                          minWidth: 100.0,
-                          minHeight: 45.0,
-                          borderWidth: 1,
-                          borderColor: [_settingsProvider?.appSettings?.theme == "dark" ? Colors.white : Colors.black],
-                          activeFgColor: _settingsProvider?.appSettings?.theme == "dark" ? Colors.black : Colors.white,
-                          inactiveBgColor: Colors.transparent,
-                          inactiveFgColor: _settingsProvider?.appSettings?.theme == "dark" ? Colors.white : Colors.black,
-                          customTextStyles: [GoogleFonts.raleway(fontSize: 16)],
-                          activeBgColor: [_settingsProvider?.appSettings?.theme == "dark" ? Colors.white : Colors.black],
-                          initialLabelIndex: _settingsProvider?.appSettings!.notificationSettings == true ? 1 : 0 ,
-                          totalSwitches: 2,
-                          labels: [AppLocalizations.of(context)!.settingsPageNotificationNo, AppLocalizations.of(context)!.settingsPageNotificationYes],
-                          onToggle: (index) {
-                            _settingsProvider?.setNotification(index == 0 ? false : true);
-                          },
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            );
-          },
-        );
       },
     );
   }
@@ -883,14 +826,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   onTap: () {
                     _showFontSizeSettingsModal();
                   },
-                ),
-                SettingsBox(
-                  title: AppLocalizations.of(context)!.settingsPageNotificationTitle,
-                  description: AppLocalizations.of(context)!.settingsPageNotificationDescription,
-                  icon: HeroIcons.bell_alert,
-                  onTap: () {
-                    _showNotificationSettingsModal();
-                  },
                   isLast: true,
                 ),
               ],
@@ -906,7 +841,35 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                   side: BorderSide(width: 0, color: Color(0xff000000))
               ),
-              onPressed: () {},
+              onPressed: () {
+                firebaseAuth?.signOut().then((value) {
+                  toastification.show(
+                    context: context,
+                    type: ToastificationType.success,
+                    style: ToastificationStyle.flatColored,
+                    title: Text(AppLocalizations.of(context)!.settingsPageLogoutSuccessTitle, style: GoogleFonts.raleway(fontWeight: FontWeight.w700),),
+                    description: Text(AppLocalizations.of(context)!.settingsPageLogoutSuccessMessage, style: GoogleFonts.raleway()),
+                    alignment: Alignment.topCenter,
+                    autoCloseDuration: const Duration(seconds: 4),
+                  );
+
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                        builder: (context) => const LoginScreen(),
+                      ),
+                          (route) => route.isFirst);
+                }).catchError((error) {
+                  toastification.show(
+                    context: context,
+                    type: ToastificationType.error,
+                    style: ToastificationStyle.flatColored,
+                    title: Text(AppLocalizations.of(context)!.settingsPageLogoutErrorTitle, style: GoogleFonts.raleway(fontWeight: FontWeight.w700),),
+                    description: Text(AppLocalizations.of(context)!.settingsPageLogoutErrorMessage, style: GoogleFonts.raleway()),
+                    alignment: Alignment.topCenter,
+                    autoCloseDuration: const Duration(seconds: 4),
+                  );
+                });
+              },
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 10),
                 child: Center(

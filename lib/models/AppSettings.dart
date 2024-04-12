@@ -20,6 +20,6 @@ class AppSettings extends HiveObject {
     required this.theme,
     required this.language,
     required this.fontSize,
-    required this.notificationSettings
+    required this.notificationSettings,
   });
 }

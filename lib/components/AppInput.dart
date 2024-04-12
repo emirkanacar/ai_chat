@@ -16,7 +16,8 @@ class AppInput extends StatelessWidget {
     this.isDense,
     this.contentPadding,
     this.maxLines,
-    this.obscureText
+    this.obscureText,
+    this.suffixIcon
   }) : super(key: key);
 
   final TextEditingController? controller;
@@ -28,6 +29,7 @@ class AppInput extends StatelessWidget {
   final EdgeInsetsGeometry? contentPadding;
   final int? maxLines;
   final bool? obscureText;
+  final Widget? suffixIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +53,7 @@ class AppInput extends StatelessWidget {
             prefixIcon,
             color: _settingsProvider.appSettings?.theme == "dark" ?  Colors.white : Color(0xFF1f1f1f),
           ) : null,
+          suffixIcon: suffixIcon,
           border: OutlineInputBorder(
               borderRadius: const BorderRadius.all(Radius.circular(10)),
               borderSide: BorderSide(color: Colors.grey.withOpacity(0.3))

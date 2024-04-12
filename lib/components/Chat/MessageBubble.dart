@@ -5,6 +5,7 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../helpers/functions.dart';
 import '../../providers/SettingsProvider.dart';
@@ -79,7 +80,20 @@ class MessageBubble extends StatelessWidget {
                   children: [
                     ClipRRect(
                         borderRadius: BorderRadius.circular(10),
-                        child: Image.file(File(images.first.toString() ?? ""), width: 250)
+                        child: Image.file(
+                          File(images.first.toString()),
+                          width: 250,
+                          errorBuilder: (BuildContext imageContext, Object image, StackTrace? error) {
+                              return Container(
+                                child: Text(
+                                  AppLocalizations.of(context)!.chatScreenImageLoadError,
+                                  style: GoogleFonts.raleway(
+                                    textStyle: Theme.of(context).textTheme.labelSmall
+                                  ),
+                                ),
+                              );
+                          },
+                        )
                     ),
                     Padding(
                       padding: EdgeInsets.only(top: 10),
@@ -87,7 +101,7 @@ class MessageBubble extends StatelessWidget {
                         messageText,
                         overflow: TextOverflow.fade,
                         style: GoogleFonts.raleway(
-                          fontSize: 16,
+                          fontSize: getFontSize(16, context).toDouble(),
                           color: Colors.white,
                         ),
                         textAlign: TextAlign.start,
