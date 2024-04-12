@@ -9,7 +9,8 @@ class ChatMessage {
     required this.message,
     required this.isUserMessage,
     required this.date,
-    required this.images
+    required this.images,
+    required this.selectedModel
   });
 
   @HiveField(0)
@@ -27,6 +28,9 @@ class ChatMessage {
   @HiveField(4)
   final String? date;
 
+  @HiveField(5)
+  final int? selectedModel;
+
   factory ChatMessage.fromJson(Map<String, dynamic> json){
     return ChatMessage(
       id: json["id"],
@@ -34,6 +38,7 @@ class ChatMessage {
       images: json["images"],
       isUserMessage: json["isUserMessage"],
       date: json["date"],
+      selectedModel: json["selectedModel"]
     );
   }
 
@@ -43,6 +48,7 @@ class ChatMessage {
     "images": images,
     "isUserMessage": isUserMessage,
     "date": date,
+    "selectedModel": selectedModel
   };
 
 }

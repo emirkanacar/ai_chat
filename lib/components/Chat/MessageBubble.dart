@@ -18,6 +18,7 @@ class MessageBubble extends StatelessWidget {
     required this.messageDate,
     required this.isLoading,
     required this.images,
+    required this.selectedModel
   }) : super(key: key);
 
   final String messageText;
@@ -25,11 +26,13 @@ class MessageBubble extends StatelessWidget {
   final String messageDate;
   final bool isLoading;
   final List<String> images;
+  final int selectedModel;
 
   @override
   Widget build(BuildContext context) {
     DateTime dateTimeWithTimeZone = DateTime.parse(messageDate);
     SettingsProvider _settingsProvider = context.watch<SettingsProvider>();
+    String model = selectedModel == 0 ? "ChatGPT" : "Gemini";
 
     return direction ? Column(
       mainAxisAlignment: MainAxisAlignment.end,
@@ -168,7 +171,7 @@ class MessageBubble extends StatelessWidget {
         Padding(
           padding: EdgeInsets.only(left: 20, bottom: 10),
           child: Text(
-            DateFormat('HH:mm').format(dateTimeWithTimeZone),
+            "${DateFormat('HH:mm').format(dateTimeWithTimeZone)} - $model",
             style: GoogleFonts.raleway(
                 color: _settingsProvider.appSettings?.theme == "dark" ?  Colors.white70 : Color(0xFF282828)
             ),

@@ -10,6 +10,7 @@ import 'package:ai_chat/helpers/functions.dart';
 import 'package:ai_chat/models/Chat/ChatMessageModel.dart';
 import 'package:ai_chat/models/hive/ChatDataModel.dart';
 import 'package:ai_chat/providers/SettingsProvider.dart';
+import 'package:ai_chat/services/ChatGPTService.dart';
 import 'package:ai_chat/services/GeminiService.dart';
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
@@ -56,6 +57,7 @@ class _NewChatScreenState extends State<ChatScreen> {
   bool waitingResponse = false;
 
   GeminiService? geminiService;
+  ChatGPTService? chatGPTService;
   int selectedModel = 0;
 
   late Box<ChatData> chatDataBox;
@@ -66,8 +68,11 @@ class _NewChatScreenState extends State<ChatScreen> {
   void initState() {
     geminiService = GeminiService();
     geminiService?.init();
-    messageController.text = widget.promptText ?? "";
 
+    chatGPTService = ChatGPTService();
+    chatGPTService?.init();
+
+    messageController.text = widget.promptText ?? "";
     _settingsProvider = context.read<SettingsProvider>();
 
     if (widget.isNewChat) {
@@ -149,7 +154,7 @@ class _NewChatScreenState extends State<ChatScreen> {
 
     setState(() {
       messageController.text = "";
-      chatMessages.add(ChatMessage(id: Uuid().toString(), message: promptText, isUserMessage: true, date: DateTime.now().toIso8601String(), images: imagesList));
+      chatMessages.add(ChatMessage(id: Uuid().toString(), message: promptText, isUserMessage: true, date: DateTime.now().toIso8601String(), images: imagesList, selectedModel: 1),);
       waitingResponse = true;
     });
 
@@ -166,7 +171,7 @@ class _NewChatScreenState extends State<ChatScreen> {
     if (selectedImages.isEmpty) {
       geminiService?.textPrompt(promptText).then((value) {
         setState(() {
-          chatMessages.add(ChatMessage(id: Uuid().toString(), message: value?.text.toString(), isUserMessage: false, date: DateTime.now().toIso8601String(), images: []));
+          chatMessages.add(ChatMessage(id: Uuid().toString(), message: value?.text.toString(), isUserMessage: false, date: DateTime.now().toIso8601String(), images: [], selectedModel: 1));
           waitingResponse = false;
           chatDataBox.put(chatId, ChatData(chatID: chatId, username: _auth.currentUser?.email ?? "null", AIType: selectedModel, messages: chatMessages, lastModifiedDate: DateTime.now().toIso8601String()));
         });
@@ -174,7 +179,7 @@ class _NewChatScreenState extends State<ChatScreen> {
         scrollBottom();
       }).catchError((onError) {
         setState(() {
-          chatMessages.add(ChatMessage(id: Uuid().toString(), message: "${AppLocalizations.of(context)!.chatScreenErrorMessage} ${onError.toString()}", isUserMessage: false, date: DateTime.now().toIso8601String(), images: []));
+          chatMessages.add(ChatMessage(id: Uuid().toString(), message: "${AppLocalizations.of(context)!.chatScreenErrorMessage} ${onError.toString()}", isUserMessage: false, date: DateTime.now().toIso8601String(), images: [], selectedModel: 1));
           waitingResponse = false;
           chatDataBox.put(chatId, ChatData(chatID: chatId, username: _auth.currentUser?.email ?? "null", AIType: selectedModel, messages: chatMessages, lastModifiedDate: DateTime.now().toIso8601String()));
         });
@@ -192,7 +197,7 @@ class _NewChatScreenState extends State<ChatScreen> {
 
       geminiService?.imagePrompt(promptText, images).then((value) {
         setState(() {
-          chatMessages.add(ChatMessage(id: Uuid().toString(), message: value?.text.toString(), isUserMessage: false, date: DateTime.now().toIso8601String(), images: []));
+          chatMessages.add(ChatMessage(id: Uuid().toString(), message: value?.text.toString(), isUserMessage: false, date: DateTime.now().toIso8601String(), images: [], selectedModel: 1));
           waitingResponse = false;
           chatDataBox.put(chatId, ChatData(chatID: chatId, username: _auth.currentUser?.email ?? "null", AIType: selectedModel, messages: chatMessages, lastModifiedDate: DateTime.now().toIso8601String()));
           selectedImages.clear();
@@ -201,7 +206,7 @@ class _NewChatScreenState extends State<ChatScreen> {
         scrollBottom();
       }).catchError((onError) {
         setState(() {
-          chatMessages.add(ChatMessage(id: Uuid().toString(), message: "${AppLocalizations.of(context)!.chatScreenErrorMessage} ${onError.toString()}", isUserMessage: false, date: DateTime.now().toIso8601String(), images: []));
+          chatMessages.add(ChatMessage(id: Uuid().toString(), message: "${AppLocalizations.of(context)!.chatScreenErrorMessage} ${onError.toString()}", isUserMessage: false, date: DateTime.now().toIso8601String(), images: [], selectedModel: 1));
           waitingResponse = false;
           chatDataBox.put(chatId, ChatData(chatID: chatId, username: _auth.currentUser?.email ?? "null", AIType: selectedModel, messages: chatMessages, lastModifiedDate: DateTime.now().toIso8601String()));
           selectedImages.clear();
@@ -210,6 +215,40 @@ class _NewChatScreenState extends State<ChatScreen> {
         scrollBottom();
       });
     }
+  }
+
+  Future<void> _generateGPTContent(String promptText) async {
+    setState(() {
+      messageController.text = "";
+      chatMessages.add(ChatMessage(id: Uuid().toString(), message: promptText, isUserMessage: true, date: DateTime.now().toIso8601String(), images: [], selectedModel: 0));
+      waitingResponse = true;
+    });
+
+    if (isCurrentNew) {
+      chatDataBox.put(chatId, ChatData(chatID: chatId, username: _auth.currentUser?.email ?? "null", AIType: selectedModel, messages: chatMessages, lastModifiedDate: DateTime.now().toIso8601String()));
+
+      setState(() {
+        isCurrentNew = false;
+      });
+    }
+
+    chatGPTService?.generateTextContent(promptText).then((value) {
+      setState(() {
+        chatMessages.add(ChatMessage(id: Uuid().toString(), message: value.toString(), isUserMessage: false, date: DateTime.now().toIso8601String(), images: [], selectedModel: 0));
+        waitingResponse = false;
+        chatDataBox.put(chatId, ChatData(chatID: chatId, username: _auth.currentUser?.email ?? "null", AIType: selectedModel, messages: chatMessages, lastModifiedDate: DateTime.now().toIso8601String()));
+      });
+
+      scrollBottom();
+    }).catchError((onError) {
+      setState(() {
+        chatMessages.add(ChatMessage(id: Uuid().toString(), message: "${AppLocalizations.of(context)!.chatScreenErrorMessage} ${onError.toString()}", isUserMessage: false, date: DateTime.now().toIso8601String(), images: [], selectedModel: 0));
+        waitingResponse = false;
+        chatDataBox.put(chatId, ChatData(chatID: chatId, username: _auth.currentUser?.email ?? "null", AIType: selectedModel, messages: chatMessages, lastModifiedDate: DateTime.now().toIso8601String()));
+      });
+
+      scrollBottom();
+    });
   }
 
   void scrollBottom() {
@@ -467,7 +506,7 @@ class _NewChatScreenState extends State<ChatScreen> {
                   itemCount: chatMessages.length,
                   controller: _scrollController,
                   itemBuilder: (BuildContext listViewContext, int index) {
-                    return MessageBubble(messageText: chatMessages[index].message.toString(), direction: chatMessages[index].isUserMessage ?? true, messageDate: chatMessages[index].date.toString(), isLoading: chatMessages.length - 1 == index ? waitingResponse : false, images: chatMessages[index].images,);
+                    return MessageBubble(messageText: chatMessages[index].message.toString(), direction: chatMessages[index].isUserMessage ?? true, messageDate: chatMessages[index].date.toString(), isLoading: chatMessages.length - 1 == index ? waitingResponse : false, images: chatMessages[index].images, selectedModel: chatMessages[index].selectedModel ?? 0,);
                   },
                 )
               ),
@@ -555,7 +594,7 @@ class _NewChatScreenState extends State<ChatScreen> {
                               iconSize: 20,
                               onPressed: () {
                                 if (selectedModel == 0) {
-
+                                  _generateGPTContent(messageController.text);
                                 } else if (selectedModel == 1) {
                                   _generateGeminiContent(messageController.text);
                                 }

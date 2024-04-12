@@ -96,7 +96,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
         try {
           await File(image).delete();
         } catch (e) {
-          return;
+          continue;
         }
       }
     }
