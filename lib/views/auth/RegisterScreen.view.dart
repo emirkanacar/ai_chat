@@ -59,9 +59,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(AppLocalizations.of(context)!.authPageRegisterTitle, style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                fontSize: getFontSize(36, context).toDouble(),
-                                fontWeight: FontWeight.w900,
+                              Text(AppLocalizations.of(context)!.authPageRegisterTitle, style: GoogleFonts.raleway(
+                                  fontSize: getFontSize(36, context).toDouble(),
+                                  fontWeight: FontWeight.w800,
+                                  textStyle: Theme.of(context).textTheme.bodyLarge
                               ),),
                               Text(AppLocalizations.of(context)!.authPageRegisterDescription, style: Theme.of(context).textTheme.labelSmall?.copyWith(
                                   fontSize: getFontSize(16, context).toDouble(),
