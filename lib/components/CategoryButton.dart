@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 import '../helpers/functions.dart';
-import '../providers/SettingsProvider.dart';
 
 class CategoryButton extends StatelessWidget {
   const CategoryButton({
@@ -19,29 +16,33 @@ class CategoryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SettingsProvider? _settingsProvider = context.watch<SettingsProvider>();
-
     return Container(
-      margin: EdgeInsets.only(top: 4, bottom: 4, right: 4, left: 0),
+      margin: const EdgeInsets.only(top: 4, bottom: 4, right: 4, left: 0),
       decoration: BoxDecoration(
-          color: isSelected ? Color(0xff3f69ef).withOpacity(0.05) : _settingsProvider.appSettings?.theme == "dark" ? Colors.black.withOpacity(0.05) : Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(8)),
-          border: Border.fromBorderSide(BorderSide(color: isSelected ? Color(0xff3f69ef) : _settingsProvider.appSettings?.theme == "dark" ? Colors.white24 : Color(0xFFC9C9C9)))
+          color: isSelected ? const Color(0xff3f69ef).withOpacity(0.05) : Theme.of(context).colorScheme.primary,
+          borderRadius: const BorderRadius.all(Radius.circular(8)),
+          border: Border.fromBorderSide(BorderSide(color: isSelected ? const Color(0xff3f69ef) : Theme.of(context).dividerColor))
       ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: onTap,
-          child: Padding(
-            padding: EdgeInsets.only(left: 10, right: 10, top: 4),
-            child: Text(buttonText, style: GoogleFonts.raleway(
-                fontWeight: FontWeight.w500,
-                fontSize: getFontSize(14, context).toDouble(),
-                color: isSelected ? const Color(0xff3f69ef) : _settingsProvider.appSettings?.theme == "dark" ? Colors.white : Colors.black.withOpacity(0.7)
-            ),),
-          )
-        ),
-      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Material(
+            color: Colors.transparent,
+            child: InkWell(
+                onTap: onTap,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 10, right: 10, top: 4, bottom: 4),
+                  child: Text(buttonText, style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      fontSize: getFontSize(14, context).toDouble(),
+                      color: isSelected ? const Color(0xff3f69ef) : Theme.of(context).textTheme.bodyLarge?.color
+                  ),),
+                )
+            ),
+          ),
+        ],
+      )
     );
   }
 }

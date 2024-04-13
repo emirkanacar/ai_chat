@@ -66,28 +66,28 @@ class _SettingsScreenState extends State<SettingsScreen> {
               heightFactor: 0.9,
               widthFactor: 1,
               child: SingleChildScrollView(
-                padding: EdgeInsets.only(bottom: 40),
+                padding: const EdgeInsets.only(bottom: 40),
                 child: Container(
-                  padding: EdgeInsets.only(top: 40, left: 20, right: 20),
+                  padding: const EdgeInsets.only(top: 40, left: 20, right: 20),
                   child: Column(
                     children: [
                       CircleAvatar(
                           radius: 24,
                           backgroundImage: firebaseAuth?.currentUser?.photoURL != null ?
-                          NetworkImage(firebaseAuth?.currentUser?.photoURL.toString() ?? "") as ImageProvider : AssetImage("assets/images/default_profile_image.jpg")
+                          NetworkImage(firebaseAuth?.currentUser?.photoURL.toString() ?? "") as ImageProvider : const AssetImage("assets/images/default_profile_image.jpg")
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Padding(
-                              padding: EdgeInsets.only(left: 10, right: 20, top: 10, bottom: 0),
+                              padding: const EdgeInsets.only(left: 10, right: 20, top: 10, bottom: 0),
                               child: Text(firebaseAuth?.currentUser?.displayName ?? "", style: GoogleFonts.raleway(
                                   fontWeight: FontWeight.w700,
                                   fontSize: getFontSize(20, context).toDouble()
                               ),)
                           ),
                           Padding(
-                              padding: EdgeInsets.only(left: 10, right: 20, top: 0),
+                              padding: const EdgeInsets.only(left: 10, right: 20, top: 0),
                               child: Text(firebaseAuth?.currentUser?.email ?? "", style: GoogleFonts.raleway(
                                 textStyle: Theme.of(context).textTheme.labelSmall,
                                 fontWeight: FontWeight.w400,
@@ -100,14 +100,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                              padding: EdgeInsets.only(left: 10, right: 20, top: 30),
+                              padding: const EdgeInsets.only(left: 10, right: 20, top: 30),
                               child: Text(AppLocalizations.of(context)!.settingsPagePersonalInfoTitle, style: GoogleFonts.raleway(
                                 fontWeight: FontWeight.w700,
                                 fontSize: getFontSize(17, context).toDouble(),
                               ), textAlign: TextAlign.start,)
                           ),
                           Padding(
-                              padding: EdgeInsets.only(left: 10, right: 20, top: 10),
+                              padding: const EdgeInsets.only(left: 10, right: 20, top: 10),
                               child: Text(AppLocalizations.of(context)!.settingsPageNameSurname, style: GoogleFonts.raleway(
                                 fontWeight: FontWeight.w600,
                                 textStyle: Theme.of(context).textTheme.labelSmall,
@@ -115,7 +115,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               ), textAlign: TextAlign.start,)
                           ),
                           Padding(
-                            padding: EdgeInsets.only(top: 5, left: 10, right: 10),
+                            padding: const EdgeInsets.only(top: 5, left: 10, right: 10),
                             child: AppInput(
                               controller: _firstNameController,
                               filled: true,
@@ -124,7 +124,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             ),
                           ),
                           Padding(
-                              padding: EdgeInsets.only(left: 10, right: 20, top: 10),
+                              padding: const EdgeInsets.only(left: 10, right: 20, top: 10),
                               child: Text(AppLocalizations.of(context)!.settingsPageEmail, style: GoogleFonts.raleway(
                                 fontWeight: FontWeight.w600,
                                 textStyle: Theme.of(context).textTheme.labelSmall,
@@ -132,7 +132,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               ), textAlign: TextAlign.start,)
                           ),
                           Padding(
-                            padding: EdgeInsets.only(top: 5, left: 10, right: 10),
+                            padding: const EdgeInsets.only(top: 5, left: 10, right: 10),
                             child: AppInput(
                               controller: _emailController,
                               filled: true,
@@ -142,7 +142,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             ),
                           ),
                           Padding(
-                              padding: EdgeInsets.only(left: 10, right: 20, top: 5),
+                              padding: const EdgeInsets.only(left: 10, right: 20, top: 5),
                               child: Text(AppLocalizations.of(context)!.settingsPageEmailDescription, style: GoogleFonts.raleway(
                                 fontWeight: FontWeight.w500,
                                 textStyle: Theme.of(context).textTheme.labelSmall,
@@ -150,7 +150,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               ), textAlign: TextAlign.start,)
                           ),
                           Padding(
-                            padding: EdgeInsets.only(left: 10, right: 10, top: 20),
+                            padding: const EdgeInsets.only(left: 10, right: 10, top: 20),
                             child: AppButton(
                               buttonText: AppLocalizations.of(context)!.settingsPageSaveButton,
                               onPressed: () {
@@ -217,14 +217,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                              padding: EdgeInsets.only(left: 10, right: 20, top: 30),
+                              padding: const EdgeInsets.only(left: 10, right: 20, top: 30),
                               child: Text(AppLocalizations.of(context)!.settingsPageSecurityInfoTitle, style: GoogleFonts.raleway(
                                 fontWeight: FontWeight.w700,
                                 fontSize: getFontSize(17, context).toDouble(),
                               ), textAlign: TextAlign.start,)
                           ),
                           Padding(
-                            padding: EdgeInsets.only(top: 5, left: 10, right: 10),
+                            padding: const EdgeInsets.only(top: 5, left: 10, right: 10),
                             child: AppInput(
                               controller: _newPassword,
                               filled: true,
@@ -234,7 +234,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             ),
                           ),
                           Padding(
-                              padding: EdgeInsets.only(left: 10, right: 20, top: 10),
+                              padding: const EdgeInsets.only(left: 10, right: 20, top: 10),
                               child: Text(AppLocalizations.of(context)!.settingsPageNewPasswordAgain, style: GoogleFonts.raleway(
                                 fontWeight: FontWeight.w600,
                                 textStyle: Theme.of(context).textTheme.labelSmall,
@@ -242,7 +242,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               ), textAlign: TextAlign.start,)
                           ),
                           Padding(
-                            padding: EdgeInsets.only(top: 5, left: 10, right: 10),
+                            padding: const EdgeInsets.only(top: 5, left: 10, right: 10),
                             child: AppInput(
                               controller: _newPasswordAgain,
                               filled: true,
@@ -252,7 +252,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(left: 10, right: 10, top: 20),
+                            padding: const EdgeInsets.only(left: 10, right: 10, top: 20),
                             child: AppButton(
                               buttonText: AppLocalizations.of(context)!.settingsPageSaveButton,
                               onPressed: () {
@@ -374,23 +374,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
               heightFactor: 0.9,
               widthFactor: 1,
               child: SingleChildScrollView(
-                padding: EdgeInsets.only(bottom: 40),
+                padding: const EdgeInsets.only(bottom: 40),
                 child: Container(
-                  padding: EdgeInsets.only(top: 40, left: 20, right: 20),
+                  padding: const EdgeInsets.only(top: 40, left: 20, right: 20),
                   child: Column(
                     children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                              padding: EdgeInsets.only(top: 0, right: 20, left: 10),
+                              padding: const EdgeInsets.only(top: 0, right: 20, left: 10),
                               child: Text("${AppLocalizations.of(context)!.settingsReAuthenticateTitle}, ${firebaseAuth?.currentUser?.displayName}", style: GoogleFonts.raleway(
                                   fontWeight: FontWeight.w500,
                                   fontSize: getFontSize(22, context).toDouble()
                               ),)
                           ),
                           Padding(
-                              padding: EdgeInsets.only(left: 10, bottom: 20),
+                              padding: const EdgeInsets.only(left: 10, bottom: 20),
                               child: Text(AppLocalizations.of(context)!.settingsReAuthenticateDesc, style: GoogleFonts.raleway(
                                   textStyle: Theme.of(context).textTheme.labelSmall,
                                   fontWeight: FontWeight.w500,
@@ -398,7 +398,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               ),)
                           ),
                           Padding(
-                              padding: EdgeInsets.only(left: 10, right: 20, top: 10),
+                              padding: const EdgeInsets.only(left: 10, right: 20, top: 10),
                               child: Text(AppLocalizations.of(context)!.settingsPageEmail, style: GoogleFonts.raleway(
                                 fontWeight: FontWeight.w600,
                                 textStyle: Theme.of(context).textTheme.labelSmall,
@@ -406,7 +406,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               ), textAlign: TextAlign.start,)
                           ),
                           Padding(
-                            padding: EdgeInsets.only(top: 5, left: 10, right: 10),
+                            padding: const EdgeInsets.only(top: 5, left: 10, right: 10),
                             child: AppInput(
                               controller: _loginEmail,
                               filled: true,
@@ -415,7 +415,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             ),
                           ),
                           Padding(
-                              padding: EdgeInsets.only(left: 10, right: 20, top: 10),
+                              padding: const EdgeInsets.only(left: 10, right: 20, top: 10),
                               child: Text(AppLocalizations.of(context)!.settingsReAuthenticatePassword, style: GoogleFonts.raleway(
                                 fontWeight: FontWeight.w600,
                                 textStyle: Theme.of(context).textTheme.labelSmall,
@@ -423,7 +423,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               ), textAlign: TextAlign.start,)
                           ),
                           Padding(
-                            padding: EdgeInsets.only(top: 5, left: 10, right: 10),
+                            padding: const EdgeInsets.only(top: 5, left: 10, right: 10),
                             child: AppInput(
                               controller: _loginPassword,
                               filled: true,
@@ -433,7 +433,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(),
+                            padding: const EdgeInsets.only(),
                             child: AppButton(
                               buttonText: AppLocalizations.of(context)!.settingsReAuthenticateButton,
                               onPressed: () {
@@ -506,14 +506,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
               heightFactor: 0.25,
               widthFactor: 1,
               child: SingleChildScrollView(
-                padding: EdgeInsets.only(bottom: 40),
+                padding: const EdgeInsets.only(bottom: 40),
                 child: Container(
-                  padding: EdgeInsets.only(top: 20, left: 20, right: 20),
+                  padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Padding(
-                          padding: EdgeInsets.only(left: 10, right: 20, top: 10, bottom: 0),
+                          padding: const EdgeInsets.only(left: 10, right: 20, top: 10, bottom: 0),
                           child: Text(AppLocalizations.of(context)!.settingsPageThemeTitle, style: GoogleFonts.raleway(
                               fontWeight: FontWeight.w700,
                               fontSize: getFontSize(20, context).toDouble(),
@@ -521,7 +521,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           ),)
                       ),
                       Padding(
-                          padding: EdgeInsets.only(left: 10, right: 20, top: 0),
+                          padding: const EdgeInsets.only(left: 10, right: 20, top: 0),
                           child: Text(AppLocalizations.of(context)!.settingsPageThemeDescription, style: GoogleFonts.raleway(
                               fontWeight: FontWeight.w400,
                               fontSize: getFontSize(15, context).toDouble(),
@@ -529,7 +529,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           ),)
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: 20),
+                        padding: const EdgeInsets.only(top: 20),
                         child: ToggleSwitch(
                           animate: true,
                           animationDuration: 150,
@@ -575,14 +575,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
               heightFactor: 0.25,
               widthFactor: 1,
               child: SingleChildScrollView(
-                padding: EdgeInsets.only(bottom: 40),
+                padding: const EdgeInsets.only(bottom: 40),
                 child: Container(
-                  padding: EdgeInsets.only(top: 20, left: 20, right: 20),
+                  padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Padding(
-                          padding: EdgeInsets.only(left: 10, right: 20, top: 10, bottom: 0),
+                          padding: const EdgeInsets.only(left: 10, right: 20, top: 10, bottom: 0),
                           child: Text(AppLocalizations.of(context)!.settingsPageLangTitle, style: GoogleFonts.raleway(
                               fontWeight: FontWeight.w700,
                               fontSize: getFontSize(20, context).toDouble(),
@@ -590,7 +590,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           ),)
                       ),
                       Padding(
-                          padding: EdgeInsets.only(left: 10, right: 20, top: 0),
+                          padding: const EdgeInsets.only(left: 10, right: 20, top: 0),
                           child: Text(AppLocalizations.of(context)!.settingsPageLangDescription, style: GoogleFonts.raleway(
                               fontWeight: FontWeight.w400,
                               fontSize: getFontSize(15, context).toDouble(),
@@ -598,7 +598,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           ),)
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: 20),
+                        padding: const EdgeInsets.only(top: 20),
                         child: ToggleSwitch(
                           animate: true,
                           animationDuration: 150,
@@ -642,21 +642,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
             heightFactor: 0.25,
             widthFactor: 1,
             child: SingleChildScrollView(
-              padding: EdgeInsets.only(bottom: 40),
+              padding: const EdgeInsets.only(bottom: 40),
               child: Container(
-                padding: EdgeInsets.only(top: 20, left: 20, right: 20),
+                padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Padding(
-                        padding: EdgeInsets.only(left: 10, right: 20, top: 10, bottom: 0),
+                        padding: const EdgeInsets.only(left: 10, right: 20, top: 10, bottom: 0),
                         child: Text(AppLocalizations.of(context)!.settingsPageFontTitle, style: GoogleFonts.raleway(
                             fontWeight: FontWeight.w700,
                             fontSize: getFontSize(20, context).toDouble()
                         ),)
                     ),
                     Padding(
-                        padding: EdgeInsets.only(left: 10, right: 20, top: 0),
+                        padding: const EdgeInsets.only(left: 10, right: 20, top: 0),
                         child: Text(AppLocalizations.of(context)!.settingsPageFontModalDescription, style: GoogleFonts.raleway(
                             fontWeight: FontWeight.w400,
                             fontSize: getFontSize(15, context).toDouble(),
@@ -664,10 +664,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         ),)
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: 20),
+                      padding: const EdgeInsets.only(top: 20),
                       child: Slider(
-                        activeColor: _settingsProvider?.appSettings?.theme == "dark" ? Colors.white : Color(0xFF282828),
-                        inactiveColor: _settingsProvider?.appSettings?.theme == "dark" ? Colors.white24 : Color(0xFF282828).withOpacity(0.2),
+                        activeColor: _settingsProvider?.appSettings?.theme == "dark" ? Colors.white : const Color(0xFF282828),
+                        inactiveColor: _settingsProvider?.appSettings?.theme == "dark" ? Colors.white24 : const Color(0xFF282828).withOpacity(0.2),
                         value: slidingValue,
                         max: 18,
                         min: 14,
@@ -687,7 +687,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: 10),
+                      padding: const EdgeInsets.only(top: 10),
                       child: slidingValue == 14 ? Text(AppLocalizations.of(context)!.settingsPageFontSmaller, style: GoogleFonts.raleway(fontSize: getFontSize(20, context).toDouble()),) : slidingValue == 16 ? Text(AppLocalizations.of(context)!.settingsPageFontMedium, style: GoogleFonts.raleway(fontSize: getFontSize(20, context).toDouble()),) : Text(AppLocalizations.of(context)!.settingsPageFontLarger, style: GoogleFonts.raleway(fontSize: getFontSize(20, context).toDouble()),)
                     )
                   ],
@@ -709,14 +709,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-              padding: EdgeInsets.only(top: 0, right: 20, left: 20),
+              padding: const EdgeInsets.only(top: 0, right: 20, left: 20),
               child: Text(AppLocalizations.of(context)!.settingsPageTitle, style: GoogleFonts.raleway(
                   fontWeight: FontWeight.w900,
                   fontSize: getFontSize(36, context).toDouble()
               ),)
           ),
           Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
               child: Text(AppLocalizations.of(context)!.settingsPageDescription, style: GoogleFonts.raleway(
                   fontWeight: FontWeight.w500,
                   fontSize: getFontSize(14, context).toDouble(),
@@ -725,7 +725,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
 
           Padding(
-              padding: EdgeInsets.only(left: 20, right: 20, top: 30, bottom: 5),
+              padding: const EdgeInsets.only(left: 20, right: 20, top: 30, bottom: 5),
               child: Text(AppLocalizations.of(context)!.settingsPageAccountSettings, style: GoogleFonts.raleway(
                   fontWeight: FontWeight.w700,
                   fontSize: getFontSize(17, context).toDouble()
@@ -733,11 +733,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           Container(
             width: double.infinity,
-            margin: EdgeInsets.only(top: 5, bottom: 10, right: 20, left: 20),
+            margin: const EdgeInsets.only(top: 5, bottom: 10, right: 20, left: 20),
             decoration: BoxDecoration(
-              color: _settingsProvider?.appSettings?.theme == "dark" ? Color(0xFF1f1f1f) : Colors.white,
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-              border: Border.fromBorderSide(BorderSide(color: _settingsProvider?.appSettings?.theme == "dark" ? Colors.white24 : Color(0xFFC9C9C9)))
+              color: _settingsProvider?.appSettings?.theme == "dark" ? const Color(0xFF1f1f1f) : Colors.white,
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
+              border: Border.fromBorderSide(BorderSide(color: _settingsProvider?.appSettings?.theme == "dark" ? Colors.white24 : const Color(0xFFC9C9C9)))
             ),
             child: Material(
               color: Colors.transparent,
@@ -746,7 +746,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   _showProfileModal();
                 },
                 child: Padding(
-                  padding: EdgeInsets.only(top: 10, bottom: 10, right: 10, left: 10),
+                  padding: const EdgeInsets.only(top: 10, bottom: 10, right: 10, left: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -755,20 +755,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           CircleAvatar(
                               radius: 24,
                               backgroundImage: firebaseAuth?.currentUser?.photoURL != null ?
-                                  NetworkImage(firebaseAuth?.currentUser?.photoURL.toString() ?? "") as ImageProvider : AssetImage("assets/images/default_profile_image.jpg")
+                                  NetworkImage(firebaseAuth?.currentUser?.photoURL.toString() ?? "") as ImageProvider : const AssetImage("assets/images/default_profile_image.jpg")
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Padding(
-                                  padding: EdgeInsets.only(left: 10, right: 20, top: 0, bottom: 0),
+                                  padding: const EdgeInsets.only(left: 10, right: 20, top: 0, bottom: 0),
                                   child: Text(firebaseAuth?.currentUser?.displayName ?? "", style: GoogleFonts.raleway(
                                       fontWeight: FontWeight.w600,
                                       fontSize: getFontSize(16, context).toDouble()
                                   ),)
                               ),
                               Padding(
-                                  padding: EdgeInsets.only(left: 10, right: 20, top: 0),
+                                  padding: const EdgeInsets.only(left: 10, right: 20, top: 0),
                                   child: Text(firebaseAuth?.currentUser?.email ?? "", style: GoogleFonts.raleway(
                                     textStyle: Theme.of(context).textTheme.labelSmall,
                                     fontWeight: FontWeight.w500,
@@ -787,7 +787,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
           ),
           Padding(
-              padding: EdgeInsets.only(left: 20, right: 20, top: 30, bottom: 5),
+              padding: const EdgeInsets.only(left: 20, right: 20, top: 30, bottom: 5),
               child: Text(AppLocalizations.of(context)!.settingsPageAccountSettings, style: GoogleFonts.raleway(
                   fontWeight: FontWeight.w700,
                   fontSize: getFontSize(17, context).toDouble()
@@ -795,8 +795,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           Container(
             width: double.infinity,
-            margin: EdgeInsets.only(top: 5, bottom: 10, right: 20, left: 20),
-            decoration: BoxDecoration(
+            margin: const EdgeInsets.only(top: 5, bottom: 10, right: 20, left: 20),
+            decoration: const BoxDecoration(
               color: Color(0xFFFFFFFF),
               borderRadius: BorderRadius.all(Radius.circular(10)),
             ),
@@ -832,14 +832,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(left: 20, right: 20, top: 10),
+            padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
             child: OutlinedButton(
               style: OutlinedButton.styleFrom(
-                  backgroundColor: Color(0xff000000),
+                  backgroundColor: const Color(0xff000000),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8.0),
                   ),
-                  side: BorderSide(width: 0, color: Color(0xff000000))
+                  side: const BorderSide(width: 0, color: Color(0xff000000))
               ),
               onPressed: () {
                 firebaseAuth?.signOut().then((value) {
@@ -871,7 +871,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 });
               },
               child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 10),
+                padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Center(
                   child: Text(AppLocalizations.of(context)!.settingsPageLogout, style: GoogleFonts.raleway(
                       color: Colors.white,

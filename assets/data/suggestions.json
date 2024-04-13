@@ -6,20 +6,20 @@
       "categoryName": "E-Mail",
       "prompts": [
         {
-          "promptCode": "Develop an enticing email to promote [your seasonal or holiday sale]. Clearly outline [your discounts or special offers], and create a sense of urgency to drive engagement",
-          "prompt": "Seasonal or holiday sale emails"
+          "promptCode": "email-1",
+          "prompt": "email-1"
         },
         {
-          "promptCode": "deneme-2",
-          "prompt": "deneme-2"
+          "promptCode": "email-2",
+          "prompt": "email-2"
         },
         {
-          "promptCode": "deneme-3",
-          "prompt": "deneme-3"
+          "promptCode": "email-3",
+          "prompt": "email-3"
         },
         {
-          "promptCode": "deneme-4",
-          "prompt": "deneme-4"
+          "promptCode": "email-4",
+          "prompt": "email-4"
         }
       ]
     },

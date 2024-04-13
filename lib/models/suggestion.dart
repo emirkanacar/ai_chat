@@ -16,7 +16,7 @@ class Suggestion {
 
   Map<String, dynamic> toJson() => {
     "dataType": dataType,
-    "data": data.map((x) => x?.toJson()).toList(),
+    "data": data.map((x) => x.toJson()).toList(),
   };
 
 }
@@ -43,7 +43,7 @@ class SuggestionData {
   Map<String, dynamic> toJson() => {
     "categoryCode": categoryCode,
     "categoryName": categoryName,
-    "prompts": prompts.map((x) => x?.toJson()).toList(),
+    "prompts": prompts.map((x) => x.toJson()).toList(),
   };
 
 }

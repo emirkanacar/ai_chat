@@ -50,7 +50,7 @@ class _MainScreenState extends State<MainScreen> {
     return PageView(
       controller: pageController,
       physics: const NeverScrollableScrollPhysics(),
-      children: [
+      children: const [
         HomeScreen(),
         ChatsScreen(),
         SettingsScreen()

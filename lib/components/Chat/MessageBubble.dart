@@ -31,7 +31,7 @@ class MessageBubble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DateTime dateTimeWithTimeZone = DateTime.parse(messageDate);
-    SettingsProvider _settingsProvider = context.watch<SettingsProvider>();
+    SettingsProvider settingsProvider = context.watch<SettingsProvider>();
     String model = selectedModel == 0 ? "ChatGPT" : "Gemini";
 
     return direction ? Column(
@@ -42,27 +42,27 @@ class MessageBubble extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             isLoading ? Padding(
-              padding: EdgeInsets.only(left: 10),
+              padding: const EdgeInsets.only(left: 10),
               child: SizedBox(
                 height: 18,
                 width: 18,
                 child: CircularProgressIndicator(
-                  color: _settingsProvider.appSettings?.theme == "dark" ?  Colors.white70 : Color(0xFF282828),
+                  color: settingsProvider.appSettings?.theme == "dark" ?  Colors.white70 : const Color(0xFF282828),
                   strokeWidth: 2,
                 ),
               ),
             ): Container(),
             Flexible(
               child: Container(
-                padding: EdgeInsets.only(top: 10, bottom: 10, right: 10, left: 10),
-                margin: EdgeInsets.only(right: 10, bottom: 2.5, left: 15),
+                padding: const EdgeInsets.only(top: 10, bottom: 10, right: 10, left: 10),
+                margin: const EdgeInsets.only(right: 10, bottom: 2.5, left: 15),
                 decoration: BoxDecoration(
-                    color: Color(0xFF282828),
+                    color: const Color(0xFF282828),
                     border: Border.all(
                       width: 1,
                       color: Colors.grey.withOpacity(0.3)
                     ),
-                    borderRadius: BorderRadius.only(
+                    borderRadius: const BorderRadius.only(
                         topRight: Radius.circular(2),
                         topLeft: Radius.circular(10),
                         bottomLeft: Radius.circular(10),
@@ -87,19 +87,17 @@ class MessageBubble extends StatelessWidget {
                           File(images.first.toString()),
                           width: 250,
                           errorBuilder: (BuildContext imageContext, Object image, StackTrace? error) {
-                              return Container(
-                                child: Text(
-                                  AppLocalizations.of(context)!.chatScreenImageLoadError,
-                                  style: GoogleFonts.raleway(
-                                    textStyle: Theme.of(context).textTheme.labelSmall
-                                  ),
+                              return Text(
+                                AppLocalizations.of(context)!.chatScreenImageLoadError,
+                                style: GoogleFonts.raleway(
+                                  textStyle: Theme.of(context).textTheme.labelSmall
                                 ),
                               );
                           },
                         )
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: 10),
+                      padding: const EdgeInsets.only(top: 10),
                       child: Text(
                         messageText,
                         overflow: TextOverflow.fade,
@@ -117,11 +115,11 @@ class MessageBubble extends StatelessWidget {
           ],
         ),
         Padding(
-          padding: EdgeInsets.only(right: 20, bottom: 10),
+          padding: const EdgeInsets.only(right: 20, bottom: 10),
           child: Text(
             DateFormat('HH:mm').format(dateTimeWithTimeZone),
             style: GoogleFonts.raleway(
-              color: _settingsProvider.appSettings?.theme == "dark" ?  Colors.white70 : Color(0xFF282828)
+              color: settingsProvider.appSettings?.theme == "dark" ?  Colors.white70 : const Color(0xFF282828)
             ),
           ),
         )
@@ -135,12 +133,12 @@ class MessageBubble extends StatelessWidget {
           children: [
             Flexible(
               child: Container(
-                  padding: EdgeInsets.only(top: 10, bottom: 10, right: 10, left: 10),
-                  margin: EdgeInsets.only(right: 40, bottom: 2.5, left: 10),
+                  padding: const EdgeInsets.only(top: 10, bottom: 10, right: 10, left: 10),
+                  margin: const EdgeInsets.only(right: 40, bottom: 2.5, left: 10),
                   decoration: BoxDecoration(
-                      color: _settingsProvider.appSettings?.theme == "dark" ?  Color(
+                      color: settingsProvider.appSettings?.theme == "dark" ? const Color(
                           0xFF101010) :  Colors.white,
-                      borderRadius: BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                           topRight: Radius.circular(10),
                           topLeft: Radius.circular(2),
                           bottomLeft: Radius.circular(10),
@@ -149,9 +147,9 @@ class MessageBubble extends StatelessWidget {
                       border: Border.all(color: Colors.grey.withOpacity(0.3), width: 1.0)
                   ),
                   child: Padding(
-                    padding: EdgeInsets.only(left: 5, right: 5),
+                    padding: const EdgeInsets.only(left: 5, right: 5),
                     child: Markdown(
-                      padding: EdgeInsets.symmetric(vertical: 2, horizontal: 2),
+                      padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 2),
                       shrinkWrap: true,
                       selectable: true,
                       data: messageText,
@@ -169,11 +167,11 @@ class MessageBubble extends StatelessWidget {
           ],
         ),
         Padding(
-          padding: EdgeInsets.only(left: 20, bottom: 10),
+          padding: const EdgeInsets.only(left: 20, bottom: 10),
           child: Text(
             "${DateFormat('HH:mm').format(dateTimeWithTimeZone)} - $model",
             style: GoogleFonts.raleway(
-                color: _settingsProvider.appSettings?.theme == "dark" ?  Colors.white70 : Color(0xFF282828)
+                color: settingsProvider.appSettings?.theme == "dark" ?  Colors.white70 : const Color(0xFF282828)
             ),
           ),
         )

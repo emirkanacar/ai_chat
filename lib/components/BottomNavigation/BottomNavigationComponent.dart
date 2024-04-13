@@ -1,6 +1,4 @@
-import 'package:ai_chat/providers/SettingsProvider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'BottomNavigationItem.dart';
 
 class BottomNavigationComponent extends StatelessWidget {
@@ -16,21 +14,19 @@ class BottomNavigationComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SettingsProvider _settingsProvider = context.watch<SettingsProvider>();
-
     return Container(
       height: 84,
       width: double.infinity,
-      padding: EdgeInsets.only(bottom: 15),
+      padding: const EdgeInsets.only(bottom: 15),
       decoration: BoxDecoration(
-        color: Color(0xFF282828),
-          border: Border(
-              top: BorderSide(color: _settingsProvider.appSettings?.theme == "dark" ? Colors.white24 : Color(0xFFC9C9C9))
-          )
+        color: Theme.of(context).colorScheme.primary,
+        border:  Border(
+          top: BorderSide(color: Theme.of(context).dividerColor)
+        )
       ),
       child: Container(
         decoration: BoxDecoration(
-          color: Color(0xFF282828),
+          color: Theme.of(context).colorScheme.primary,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,

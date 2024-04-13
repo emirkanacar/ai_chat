@@ -3,7 +3,6 @@ import 'package:ai_chat/models/AppSettings.dart';
 import 'package:ai_chat/models/Chat/ChatMessageModel.dart';
 import 'package:ai_chat/providers/PageProvider.dart';
 import 'package:ai_chat/providers/SettingsProvider.dart';
-import 'package:ai_chat/providers/UserProvider.dart';
 import 'package:ai_chat/views/Chat/ChatsScreen.view.dart';
 import 'package:ai_chat/views/HomeScreen.view.dart';
 import 'package:ai_chat/views/SettingsScreen.view.dart';
@@ -40,9 +39,6 @@ Future main() async {
       ChangeNotifierProvider(
         create: (_) => SettingsProvider(),
       ),
-      ChangeNotifierProvider(
-        create: (_) => UserProvider(),
-      )
     ],
     child: const MyApp(),
   ));
@@ -53,7 +49,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SettingsProvider _settingsProvider = context.watch<SettingsProvider>();
+    SettingsProvider settingsProvider = context.watch<SettingsProvider>();
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -68,10 +64,10 @@ class MyApp extends StatelessWidget {
         Locale("tr"),
         Locale("en")
       ],
-      locale: Locale(_settingsProvider.appSettings?.language ?? "tr"),
+      locale: Locale(settingsProvider.appSettings?.language ?? "tr"),
       theme: AppThemes.lightTheme,
       darkTheme: AppThemes.darkTheme,
-      themeMode: _settingsProvider.appSettings?.theme == "dark" ? ThemeMode.dark : ThemeMode.light,
+      themeMode: settingsProvider.appSettings?.theme == "dark" ? ThemeMode.dark : ThemeMode.light,
       home: const SplashScreen(),
       routes: {
         '/home': (context) => const HomeScreen(),

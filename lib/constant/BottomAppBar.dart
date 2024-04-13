@@ -21,25 +21,25 @@ class _AppBottomBarState extends State<AppBottomBar> {
     return BottomNavigationComponent(
       bottomBarItem: [
         BottomNavigationItem(
-          text: "Ana Sayfa",
+          text: "",
           icon: Iconsax.home_2_outline,
-          isSelected: pageProvider.pageController?.page == 0,
+          isSelected: pageProvider.pageController?.positions.isNotEmpty == true ? pageProvider.pageController?.page == 0 : true,
           onTap: () {
             pageProvider.pageController?.jumpToPage(0);
           },
         ),
         BottomNavigationItem(
-          text: "Sohbetler",
+          text: "",
           icon: Iconsax.messages_1_outline,
-          isSelected: pageProvider.pageController?.page == 1,
+          isSelected: pageProvider.pageController?.positions.isNotEmpty == true ? pageProvider.pageController?.page == 1 : true,
           onTap: () {
             pageProvider.pageController?.jumpToPage(1);
           },
         ),
         BottomNavigationItem(
-          text: "Ayarlar",
+          text: "",
           icon: Iconsax.setting_2_outline,
-          isSelected: pageProvider.pageController?.page == 2,
+          isSelected: pageProvider.pageController?.positions.isNotEmpty == true ? pageProvider.pageController?.page == 2 : true,
           onTap: () {
             pageProvider.pageController?.jumpToPage(2);
           },

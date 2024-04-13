@@ -141,14 +141,14 @@ class _ChatsScreenState extends State<ChatsScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                      padding: EdgeInsets.only(top: 0, right: 20, left: 20),
+                      padding: const EdgeInsets.only(top: 0, right: 20, left: 20),
                       child: Text(AppLocalizations.of(context)!.chatsTitle, style: GoogleFonts.raleway(
                           fontWeight: FontWeight.w900,
                           fontSize: getFontSize(36, context).toDouble()
                       ),)
                   ),
                   Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
                       child: Text(AppLocalizations.of(context)!.chatsDescription, style: GoogleFonts.raleway(
                           textStyle: Theme.of(context).textTheme.labelSmall,
                           fontWeight: FontWeight.w500,
@@ -158,7 +158,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
                 ],
               ),
               Padding(
-                padding: EdgeInsets.only(right: 20),
+                padding: const EdgeInsets.only(right: 20),
                 child: ButtonWithIcon(
                   icon: HeroIcons.plus,
                   onPressed: () {
@@ -187,7 +187,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
                 _updateData();
               },
               child: Padding(
-                padding: EdgeInsets.only(top: 20, right: 20, left: 20),
+                padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
                 child: ListView.builder(
                   itemCount: chats?.length,
                   shrinkWrap: true,

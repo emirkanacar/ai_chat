@@ -154,7 +154,7 @@ class _NewChatScreenState extends State<ChatScreen> {
 
     setState(() {
       messageController.text = "";
-      chatMessages.add(ChatMessage(id: Uuid().toString(), message: promptText, isUserMessage: true, date: DateTime.now().toIso8601String(), images: imagesList, selectedModel: 1),);
+      chatMessages.add(ChatMessage(id: const Uuid().toString(), message: promptText, isUserMessage: true, date: DateTime.now().toIso8601String(), images: imagesList, selectedModel: 1),);
       waitingResponse = true;
     });
 
@@ -171,7 +171,7 @@ class _NewChatScreenState extends State<ChatScreen> {
     if (selectedImages.isEmpty) {
       geminiService?.textPrompt(promptText).then((value) {
         setState(() {
-          chatMessages.add(ChatMessage(id: Uuid().toString(), message: value?.text.toString(), isUserMessage: false, date: DateTime.now().toIso8601String(), images: [], selectedModel: 1));
+          chatMessages.add(ChatMessage(id: const Uuid().toString(), message: value?.text.toString(), isUserMessage: false, date: DateTime.now().toIso8601String(), images: [], selectedModel: 1));
           waitingResponse = false;
           chatDataBox.put(chatId, ChatData(chatID: chatId, username: _auth.currentUser?.email ?? "null", AIType: selectedModel, messages: chatMessages, lastModifiedDate: DateTime.now().toIso8601String()));
         });
@@ -179,7 +179,7 @@ class _NewChatScreenState extends State<ChatScreen> {
         scrollBottom();
       }).catchError((onError) {
         setState(() {
-          chatMessages.add(ChatMessage(id: Uuid().toString(), message: "${AppLocalizations.of(context)!.chatScreenErrorMessage} ${onError.toString()}", isUserMessage: false, date: DateTime.now().toIso8601String(), images: [], selectedModel: 1));
+          chatMessages.add(ChatMessage(id: const Uuid().toString(), message: "${AppLocalizations.of(context)!.chatScreenErrorMessage} ${onError.toString()}", isUserMessage: false, date: DateTime.now().toIso8601String(), images: [], selectedModel: 1));
           waitingResponse = false;
           chatDataBox.put(chatId, ChatData(chatID: chatId, username: _auth.currentUser?.email ?? "null", AIType: selectedModel, messages: chatMessages, lastModifiedDate: DateTime.now().toIso8601String()));
         });
@@ -197,7 +197,7 @@ class _NewChatScreenState extends State<ChatScreen> {
 
       geminiService?.imagePrompt(promptText, images).then((value) {
         setState(() {
-          chatMessages.add(ChatMessage(id: Uuid().toString(), message: value?.text.toString(), isUserMessage: false, date: DateTime.now().toIso8601String(), images: [], selectedModel: 1));
+          chatMessages.add(ChatMessage(id: const Uuid().toString(), message: value?.text.toString(), isUserMessage: false, date: DateTime.now().toIso8601String(), images: [], selectedModel: 1));
           waitingResponse = false;
           chatDataBox.put(chatId, ChatData(chatID: chatId, username: _auth.currentUser?.email ?? "null", AIType: selectedModel, messages: chatMessages, lastModifiedDate: DateTime.now().toIso8601String()));
           selectedImages.clear();
@@ -206,7 +206,7 @@ class _NewChatScreenState extends State<ChatScreen> {
         scrollBottom();
       }).catchError((onError) {
         setState(() {
-          chatMessages.add(ChatMessage(id: Uuid().toString(), message: "${AppLocalizations.of(context)!.chatScreenErrorMessage} ${onError.toString()}", isUserMessage: false, date: DateTime.now().toIso8601String(), images: [], selectedModel: 1));
+          chatMessages.add(ChatMessage(id: const Uuid().toString(), message: "${AppLocalizations.of(context)!.chatScreenErrorMessage} ${onError.toString()}", isUserMessage: false, date: DateTime.now().toIso8601String(), images: [], selectedModel: 1));
           waitingResponse = false;
           chatDataBox.put(chatId, ChatData(chatID: chatId, username: _auth.currentUser?.email ?? "null", AIType: selectedModel, messages: chatMessages, lastModifiedDate: DateTime.now().toIso8601String()));
           selectedImages.clear();
@@ -220,7 +220,7 @@ class _NewChatScreenState extends State<ChatScreen> {
   Future<void> _generateGPTContent(String promptText) async {
     setState(() {
       messageController.text = "";
-      chatMessages.add(ChatMessage(id: Uuid().toString(), message: promptText, isUserMessage: true, date: DateTime.now().toIso8601String(), images: [], selectedModel: 0));
+      chatMessages.add(ChatMessage(id: const Uuid().toString(), message: promptText, isUserMessage: true, date: DateTime.now().toIso8601String(), images: [], selectedModel: 0));
       waitingResponse = true;
     });
 
@@ -234,7 +234,7 @@ class _NewChatScreenState extends State<ChatScreen> {
 
     chatGPTService?.generateTextContent(promptText).then((value) {
       setState(() {
-        chatMessages.add(ChatMessage(id: Uuid().toString(), message: value.toString(), isUserMessage: false, date: DateTime.now().toIso8601String(), images: [], selectedModel: 0));
+        chatMessages.add(ChatMessage(id: const Uuid().toString(), message: value.toString(), isUserMessage: false, date: DateTime.now().toIso8601String(), images: [], selectedModel: 0));
         waitingResponse = false;
         chatDataBox.put(chatId, ChatData(chatID: chatId, username: _auth.currentUser?.email ?? "null", AIType: selectedModel, messages: chatMessages, lastModifiedDate: DateTime.now().toIso8601String()));
       });
@@ -242,7 +242,7 @@ class _NewChatScreenState extends State<ChatScreen> {
       scrollBottom();
     }).catchError((onError) {
       setState(() {
-        chatMessages.add(ChatMessage(id: Uuid().toString(), message: "${AppLocalizations.of(context)!.chatScreenErrorMessage} ${onError.toString()}", isUserMessage: false, date: DateTime.now().toIso8601String(), images: [], selectedModel: 0));
+        chatMessages.add(ChatMessage(id: const Uuid().toString(), message: "${AppLocalizations.of(context)!.chatScreenErrorMessage} ${onError.toString()}", isUserMessage: false, date: DateTime.now().toIso8601String(), images: [], selectedModel: 0));
         waitingResponse = false;
         chatDataBox.put(chatId, ChatData(chatID: chatId, username: _auth.currentUser?.email ?? "null", AIType: selectedModel, messages: chatMessages, lastModifiedDate: DateTime.now().toIso8601String()));
       });
@@ -277,12 +277,12 @@ class _NewChatScreenState extends State<ChatScreen> {
                 widthFactor: 1,
                 heightFactor: 0.2,
                 child: Container(
-                  padding: EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
+                  padding: const EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ListTile(
-                        leading: CircleAvatar(
+                        leading: const CircleAvatar(
                           backgroundColor: Color(0xFF282828),
                           child: Icon(AntDesign.camera_outline, size: 22, color: Colors.white,),
                         ),
@@ -300,7 +300,7 @@ class _NewChatScreenState extends State<ChatScreen> {
                       ),
                       Divider(color: Theme.of(context).dividerColor),
                       ListTile(
-                        leading: CircleAvatar(
+                        leading: const CircleAvatar(
                           backgroundColor: Color(0xFF282828),
                           child: Icon(HeroIcons.photo, size: 22, color: Colors.white,),
                         ),
@@ -348,9 +348,9 @@ class _NewChatScreenState extends State<ChatScreen> {
       child: Container(
         decoration: BoxDecoration(
           color: Theme.of(context).dialogBackgroundColor,
-          borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))
+          borderRadius: const BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))
         ),
-        padding: EdgeInsets.only(top: 10, bottom: 10),
+        padding: const EdgeInsets.only(top: 10, bottom: 10),
         child: Column(
           children: [
             Flexible(
@@ -359,7 +359,7 @@ class _NewChatScreenState extends State<ChatScreen> {
               child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -376,7 +376,7 @@ class _NewChatScreenState extends State<ChatScreen> {
                                 child: Row(
                                   children: [
                                     Padding(
-                                      padding: EdgeInsets.only(right: 10),
+                                      padding: const EdgeInsets.only(right: 10),
                                       child: Icon(HeroIcons.trash, size: 18, color: _settingsProvider?.appSettings?.theme == "dark" ? Colors.white : Colors.black),
                                     ),
                                     Text(AppLocalizations.of(context)!.chatScreenDeleteChat, style: GoogleFonts.raleway(
@@ -403,15 +403,15 @@ class _NewChatScreenState extends State<ChatScreen> {
                               ),
                               offset: const Offset(0, 0),
                             ),
-                            menuItemStyleData: MenuItemStyleData(
+                            menuItemStyleData: const MenuItemStyleData(
                               customHeights: [
                                 48,
                               ],
-                              padding: const EdgeInsets.only(left: 16, right: 0),
+                              padding: EdgeInsets.only(left: 16, right: 0),
                             ),
                             buttonStyleData: ButtonStyleData(
                                 decoration: BoxDecoration(
-                                    border: Border.fromBorderSide(BorderSide(color: Colors.transparent)),
+                                    border: const Border.fromBorderSide(BorderSide(color: Colors.transparent)),
                                     borderRadius: BorderRadius.circular(16)
                                 )
                             ),
@@ -420,7 +420,7 @@ class _NewChatScreenState extends State<ChatScreen> {
                         Column(
                           children: [
                             Padding(
-                                padding: EdgeInsets.only(left: 10, right: 20, top: 10, bottom: 0),
+                                padding: const EdgeInsets.only(left: 10, right: 20, top: 10, bottom: 0),
                                 child: Text("AI Chat", style: GoogleFonts.raleway(
                                     fontWeight: FontWeight.w700,
                                     fontSize: getFontSize(20, context).toDouble(),
@@ -428,7 +428,7 @@ class _NewChatScreenState extends State<ChatScreen> {
                                 ),)
                             ),
                             Padding(
-                                padding: EdgeInsets.only(left: 10, right: 20, top: 0),
+                                padding: const EdgeInsets.only(left: 10, right: 20, top: 0),
                                 child: Text(isCurrentNew ? AppLocalizations.of(context)!.chatScreenNewChatTitle : AppLocalizations.of(context)!.chatScreenMessagesTitle, style: GoogleFonts.raleway(
                                   fontWeight: FontWeight.w400,
                                   fontSize: getFontSize(15, context).toDouble(),
@@ -446,15 +446,15 @@ class _NewChatScreenState extends State<ChatScreen> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   AnimatedToggleSwitch<int>.size(
                     current: min(selectedModel, 1),
                     style: ToggleStyle(
-                      backgroundColor: _settingsProvider?.appSettings?.theme == "dark" ? Color(0xFF1E1D1D) : Color(0xFFFDFDFD),
+                      backgroundColor: _settingsProvider?.appSettings?.theme == "dark" ? const Color(0xFF1E1D1D) : const Color(0xFFFDFDFD),
                       indicatorColor: _settingsProvider?.appSettings?.theme == "dark" ? Colors.black.withOpacity(0.6) : Colors.black,
-                      borderColor: Color(0xFF313131),
+                      borderColor: const Color(0xFF313131),
                       borderRadius: BorderRadius.circular(8.0),
                       indicatorBorderRadius: BorderRadius.zero,
                     ),
@@ -462,7 +462,7 @@ class _NewChatScreenState extends State<ChatScreen> {
                     height: 40,
                     iconOpacity: 1.0,
                     selectedIconScale: 1.0,
-                    indicatorSize: Size.fromWidth(100),
+                    indicatorSize: const Size.fromWidth(100),
                     iconAnimationType: AnimationType.onHover,
                     styleAnimationType: AnimationType.onHover,
                     spacing: 1.0,
@@ -480,7 +480,7 @@ class _NewChatScreenState extends State<ChatScreen> {
                       return Center(
                           child: Text(text,
                               style: GoogleFonts.raleway(
-                                  color: Color.lerp(_settingsProvider?.appSettings?.theme == "dark" ? Colors.white60 : Color(0xff1f1f1f), Colors.white, local.animationValue)
+                                  color: Color.lerp(_settingsProvider?.appSettings?.theme == "dark" ? Colors.white60 : const Color(0xff1f1f1f), Colors.white, local.animationValue)
                               )
                           )
                       );
@@ -488,7 +488,7 @@ class _NewChatScreenState extends State<ChatScreen> {
                     borderWidth: 1.5,
                     onChanged: (i) => setState(() => selectedModel = i),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Divider(color: Theme.of(context).dividerColor),
@@ -498,7 +498,7 @@ class _NewChatScreenState extends State<ChatScreen> {
             Flexible(
               flex: 70,
               fit: FlexFit.tight,
-              child: Container(
+              child: SizedBox(
                 width: double.infinity,
                 child: ListView.builder(
                   shrinkWrap: true,
@@ -516,7 +516,7 @@ class _NewChatScreenState extends State<ChatScreen> {
               fit: FlexFit.tight,
               child: Container(
                   width: double.infinity,
-                  padding: EdgeInsets.only(bottom: 0, right: 20, left: 20, top: 5),
+                  padding: const EdgeInsets.only(bottom: 0, right: 20, left: 20, top: 5),
                   decoration: BoxDecoration(
                     border: Border(
                       top: BorderSide(width: 1.0, color: Theme.of(context).dividerColor),
@@ -544,15 +544,15 @@ class _NewChatScreenState extends State<ChatScreen> {
                               );
                             },
                             child: Container(
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 color: Color(0xFF282828),
                                 borderRadius: BorderRadius.all(Radius.circular(50))
                               ),
-                              child: Icon(HeroIcons.x_mark, color: Colors.white, size: 18,),
+                              child: const Icon(HeroIcons.x_mark, color: Colors.white, size: 18,),
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(left: 10),
+                            padding: const EdgeInsets.only(left: 10),
                             child: Text(
                               "${selectedImages.length} ${AppLocalizations.of(context)!.chatScreenImageSelectedLabel}",
                               style: GoogleFonts.raleway(
@@ -576,12 +576,12 @@ class _NewChatScreenState extends State<ChatScreen> {
                             fit: FlexFit.tight,
                             flex: 12,
                             child: Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                               child: AppInput(
                                 controller: messageController,
                                 maxLines: 1,
                                 isDense: true,
-                                contentPadding: EdgeInsets.only(top: 10, bottom: 10, right: 20, left: 20),
+                                contentPadding: const EdgeInsets.only(top: 10, bottom: 10, right: 20, left: 20),
                                 hintText: AppLocalizations.of(context)!.chatScreenMessageInput,
                               ),
                             ),

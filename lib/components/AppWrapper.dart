@@ -1,12 +1,6 @@
-import 'package:ai_chat/components/BottomNavigation/BottomNavigationComponent.dart';
-import 'package:ai_chat/constant/theme.dart';
-import 'package:ai_chat/providers/SettingsProvider.dart';
 import 'package:flutter/material.dart';
-import 'package:icons_plus/icons_plus.dart';
-import 'package:provider/provider.dart';
 
 import '../constant/BottomAppBar.dart';
-import 'BottomNavigation/BottomNavigationItem.dart';
 
 class AppWrapper extends StatefulWidget {
   const AppWrapper({
@@ -21,18 +15,13 @@ class AppWrapper extends StatefulWidget {
 }
 
 class _AppWrapperState extends State<AppWrapper> {
-  SettingsProvider? _settingsProvider;
-
   @override
   void initState() {
-    _settingsProvider = context.read<SettingsProvider>();
-
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    _settingsProvider = context.watch<SettingsProvider>();
 
     return Scaffold(
       resizeToAvoidBottomInset: false,

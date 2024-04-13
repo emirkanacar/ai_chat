@@ -55,19 +55,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     Expanded(
                       flex: 6,
                       child: Padding(
-                          padding: EdgeInsets.only(left: 25),
+                          padding: const EdgeInsets.only(left: 25),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(AppLocalizations.of(context)!.authPageRegisterTitle, style: GoogleFonts.raleway(
-                                  fontSize: getFontSize(36, context).toDouble(),
-                                  fontWeight: FontWeight.w800,
-                                  textStyle: Theme.of(context).textTheme.bodyLarge
+                              Text(AppLocalizations.of(context)!.authPageRegisterTitle, style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                fontSize: getFontSize(36, context).toDouble(),
+                                fontWeight: FontWeight.w900,
                               ),),
-                              Text(AppLocalizations.of(context)!.authPageRegisterDescription, style: GoogleFonts.raleway(
+                              Text(AppLocalizations.of(context)!.authPageRegisterDescription, style: Theme.of(context).textTheme.labelSmall?.copyWith(
                                   fontSize: getFontSize(16, context).toDouble(),
-                                  fontWeight: FontWeight.w500,
-                                  textStyle: Theme.of(context).textTheme.labelSmall
+                                  fontWeight: FontWeight.w600
                               ),),
                             ],
                           )
@@ -76,8 +74,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     Expanded(
                       flex: 4,
                       child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 0),
-                        child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 0),
+                        child: SizedBox(
                           height: 128,
                           width: 128,
                           child: Lottie.asset('assets/animations/login_animation.json'),
@@ -200,7 +198,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           height: 10,
                         ),
                         Padding(
-                          padding: EdgeInsets.only(bottom: 5, top: 20),
+                          padding: const EdgeInsets.only(bottom: 5, top: 20),
                           child: Text(AppLocalizations.of(context)!.authPageRegisterAlreadyHaveAccount, style: GoogleFonts.raleway(
                               fontSize: 16,
                               fontWeight: FontWeight.w500,

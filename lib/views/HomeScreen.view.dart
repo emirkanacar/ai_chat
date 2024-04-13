@@ -77,14 +77,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                        padding: EdgeInsets.only(top: 20, right: 20, left: 20),
+                        padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
                         child: Text(AppLocalizations.of(context)!.homepageTitle, style: GoogleFonts.raleway(
                             fontWeight: FontWeight.w900,
                             fontSize: getFontSize(36, context).toDouble()
                         ),)
                     ),
                     Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
                         child: Text(AppLocalizations.of(context)!.homepageDescription, style: GoogleFonts.raleway(
                             textStyle: Theme.of(context).textTheme.labelSmall,
                             fontWeight: FontWeight.w400,
@@ -106,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
          Padding(
-           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
            child: SizedBox(
              height: 40,
              child: ListView.builder(
@@ -128,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
          ),
           Expanded(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 0),
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
               child: ListView.builder(
                 itemCount: suggestions?.data[selectedCategoryIndex].prompts.length,
                 itemBuilder: (BuildContext context, int index) {

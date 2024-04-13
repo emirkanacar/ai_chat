@@ -1,4 +1,6 @@
 {
+  "loadingText": "Loading...",
+
   "homepageTitle": "Discover!",
   "homepageDescription": "Start a conversation with ready-made dialogs!",
   "homepageCategoryEmail": "EMail",

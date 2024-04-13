@@ -1,14 +1,14 @@
 import 'package:ai_chat/MainScreen.dart';
+import 'package:ai_chat/helpers/functions.dart';
 import 'package:ai_chat/models/AppSettings.dart';
 import 'package:ai_chat/providers/SettingsProvider.dart';
-import 'package:ai_chat/providers/UserProvider.dart';
 import 'package:ai_chat/views/auth/LoginScreen.view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -23,20 +23,12 @@ class _SplashScreenState extends State<SplashScreen> {
   AppSettings? appSettings;
   bool isAuthenticated = false;
   SettingsProvider? _settingsProvider;
-  UserProvider? _userProvider;
 
   @override
   void initState() {
     auth = FirebaseAuth.instance;
     user = auth?.currentUser;
     _settingsProvider = context.read<SettingsProvider>();
-    _userProvider = context.read<UserProvider>();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) {
-        _userProvider?.setFirebaseAuth(null);
-      }
-    });
 
     _initApp();
 
@@ -77,12 +69,12 @@ class _SplashScreenState extends State<SplashScreen> {
     if (isAuthenticated) {
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
-            builder: (context) => MainScreen(),
+            builder: (context) => const MainScreen(),
           ), (route) => route.isFirst);
     } else {
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
-            builder: (context) => LoginScreen(),
+            builder: (context) => const LoginScreen(),
           ),
               (route) => route.isFirst);
     }
@@ -95,28 +87,42 @@ class _SplashScreenState extends State<SplashScreen> {
     _settingsProvider = context.watch<SettingsProvider>();
 
     return Scaffold(
-      body: SafeArea(
-        child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("AI Chat", style: GoogleFonts.raleway(fontSize: 32, fontWeight: FontWeight.w700),),
-              Text("Yükleniyor...", style: GoogleFonts.raleway(fontSize: 18), textAlign: TextAlign.center,),
-              Padding(
-                padding: EdgeInsets.only(top: 20),
-                child: SizedBox(
-                  width: 48,
-                  height: 48,
-                  child: CircularProgressIndicator(
-                    color: Colors.black,
-                    strokeWidth: 2,
+      body: Container(
+        color: Theme.of(context).dialogBackgroundColor,
+        child: SafeArea(
+          child: Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "AI Chat",
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      fontSize: getFontSize(36, context).toDouble(),
+                      fontWeight: FontWeight.w800
+                    ),
                   ),
-                ),
-              )
-            ],
-          ),
-        )
+                  Text(
+                    AppLocalizations.of(context)!.loadingText,
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      fontSize: getFontSize(18, context).toDouble()
+                    )
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20),
+                    child: SizedBox(
+                      width: 48,
+                      height: 48,
+                      child: CircularProgressIndicator(
+                        color: Theme.of(context).textTheme.bodyLarge?.color,
+                        strokeWidth: 2,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            )
+        ),
       ),
     );
   }

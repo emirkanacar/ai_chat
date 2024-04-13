@@ -26,22 +26,22 @@ class ChatListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SettingsProvider? _settingsProvider = context.watch<SettingsProvider>();
-    Jiffy.setLocale(_settingsProvider.appSettings?.language ?? "tr");
+    SettingsProvider? settingsProvider = context.watch<SettingsProvider>();
+    Jiffy.setLocale(settingsProvider.appSettings?.language ?? "tr");
 
     return Container(
-      margin: EdgeInsets.only(top: 4, bottom: 4, right: 4, left: 4),
+      margin: const EdgeInsets.only(top: 4, bottom: 4, right: 4, left: 4),
       decoration: BoxDecoration(
-          color: _settingsProvider.appSettings?.theme == "dark" ? Colors.black.withOpacity(0.05) : Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-          border: Border.fromBorderSide(BorderSide(color: _settingsProvider.appSettings?.theme == "dark" ? Colors.white24 : Color(0xFFC9C9C9)))
+          color: settingsProvider.appSettings?.theme == "dark" ? Colors.black.withOpacity(0.05) : Colors.white,
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
+          border: Border.fromBorderSide(BorderSide(color: settingsProvider.appSettings?.theme == "dark" ? Colors.white24 : const Color(0xFFC9C9C9)))
       ),
       child: Material(
         color: Colors.transparent,
         child: InkWell(
           onTap: onTap,
           child: Padding(
-            padding: EdgeInsets.only(left: 10, top: 10, bottom: 10),
+            padding: const EdgeInsets.only(left: 10, top: 10, bottom: 10),
             child: Row(
               children: [
                 Expanded(
@@ -73,7 +73,7 @@ class ChatListItem extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(right: 10),
+                  padding: const EdgeInsets.only(right: 10),
                   child: ButtonWithIcon(
                     icon: HeroIcons.trash,
                     onPressed: onDeleteButtonTap,

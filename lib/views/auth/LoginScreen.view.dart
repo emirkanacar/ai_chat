@@ -43,23 +43,23 @@ class _LoginScreenState extends State<LoginScreen> {
               heightFactor: 0.9,
               widthFactor: 1,
               child: SingleChildScrollView(
-                padding: EdgeInsets.only(bottom: 40),
+                padding: const EdgeInsets.only(bottom: 40),
                 child: Container(
-                  padding: EdgeInsets.only(top: 40, left: 20, right: 20),
+                  padding: const EdgeInsets.only(top: 40, left: 20, right: 20),
                   child: Column(
                     children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                              padding: EdgeInsets.only(top: 0, right: 20, left: 10),
+                              padding: const EdgeInsets.only(top: 0, right: 20, left: 10),
                               child: Text(AppLocalizations.of(context)!.authPageForgotPasswordTitle, style: GoogleFonts.raleway(
                                   fontWeight: FontWeight.w700,
                                   fontSize: getFontSize(22, context).toDouble()
                               ),)
                           ),
                           Padding(
-                              padding: EdgeInsets.only(left: 10, bottom: 20),
+                              padding: const EdgeInsets.only(left: 10, bottom: 20),
                               child: Text(AppLocalizations.of(context)!.authPageForgotPasswordDescription, style: GoogleFonts.raleway(
                                   textStyle: Theme.of(context).textTheme.labelSmall,
                                   fontWeight: FontWeight.w500,
@@ -67,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),)
                           ),
                           Padding(
-                              padding: EdgeInsets.only(left: 10, right: 20, top: 10),
+                              padding: const EdgeInsets.only(left: 10, right: 20, top: 10),
                               child: Text(AppLocalizations.of(context)!.authPageForgotPasswordEmail, style: GoogleFonts.raleway(
                                 fontWeight: FontWeight.w600,
                                 textStyle: Theme.of(context).textTheme.labelSmall,
@@ -75,7 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ), textAlign: TextAlign.start,)
                           ),
                           Padding(
-                            padding: EdgeInsets.only(top: 5, left: 10, right: 10),
+                            padding: const EdgeInsets.only(top: 5, left: 10, right: 10),
                             child: AppInput(
                               controller: _forgottenEmailController,
                               filled: true,
@@ -84,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(top: 20, left: 10, right: 10),
+                            padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
                             child: AppButton(
                               buttonText: AppLocalizations.of(context)!.authPageForgotPasswordSend,
                               isLoading: isEmailForgottenLoading,
@@ -168,7 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Expanded(
                     flex: 6,
                     child: Padding(
-                        padding: EdgeInsets.only(left: 25),
+                        padding: const EdgeInsets.only(left: 25),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -189,8 +189,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   Expanded(
                     flex: 4,
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 0),
-                      child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 0),
+                      child: SizedBox(
                         height: 128,
                         width: 128,
                         child: Lottie.asset('assets/animations/login_animation.json'),
@@ -286,13 +286,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       InkWell(
                         child: Padding(
-                          padding: EdgeInsets.only(top: 10),
+                          padding: const EdgeInsets.only(top: 10),
                           child: Text(
                             AppLocalizations.of(context)!.authPageLoginForgotPassword,
                             style: GoogleFonts.raleway(
-                              color: Color(0xFF3b61dc),
+                              color: const Color(0xFF3b61dc),
                               decoration: TextDecoration.underline,
-                              decorationColor: Color(0xFF3b61dc),
+                              decorationColor: const Color(0xFF3b61dc),
                               fontSize: getFontSize(16, context).toDouble(),
                             ),
                             textAlign: TextAlign.center,
@@ -303,7 +303,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         }
                       ),
                       Padding(
-                        padding: EdgeInsets.only(bottom: 5, top: 20),
+                        padding: const EdgeInsets.only(bottom: 5, top: 20),
                         child: Text(AppLocalizations.of(context)!.authPageLoginDontHaveAccount, style: GoogleFonts.raleway(
                             fontSize: getFontSize(16, context).toDouble(),
                             fontWeight: FontWeight.w500,

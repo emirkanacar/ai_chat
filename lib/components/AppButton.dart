@@ -19,20 +19,20 @@ class AppButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return OutlinedButton(
       style: OutlinedButton.styleFrom(
-          backgroundColor: Color(0xFF3b61dc),
+          backgroundColor: const Color(0xFF3b61dc),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8.0),
           ),
-          side: BorderSide(width: 0, color: Color(0xFF3b61dc))
+          side: const BorderSide(width: 0, color: Color(0xFF3b61dc))
       ),
       onPressed: isLoading == true ? null : onPressed,
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 10),
+        padding: const EdgeInsets.symmetric(vertical: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(buttonText, style: GoogleFonts.poppins(
+            Text(buttonText, style: GoogleFonts.raleway(
                 color: Colors.white,
                 fontWeight: FontWeight.w600,
                 fontSize: getFontSize(15, context).toDouble()

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 import '../helpers/functions.dart';
-import '../providers/SettingsProvider.dart';
 
 class PromptBox extends StatelessWidget {
   const PromptBox({
@@ -17,14 +15,13 @@ class PromptBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SettingsProvider? _settingsProvider = context.watch<SettingsProvider>();
 
     return Container(
         margin: const EdgeInsets.only(top: 4, bottom: 4, right: 4, left: 4),
         decoration: BoxDecoration(
-            color: _settingsProvider.appSettings?.theme == "dark" ? Colors.black.withOpacity(0.05) : Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(15)),
-            border: Border.fromBorderSide(BorderSide(color: _settingsProvider.appSettings?.theme == "dark" ? Colors.white24 : Color(0xFFC9C9C9)))
+            color: Theme.of(context).dialogBackgroundColor,
+            borderRadius: const BorderRadius.all(Radius.circular(15)),
+            border: Border.fromBorderSide(BorderSide(color: Theme.of(context).dividerColor))
         ),
         child: Material(
           color: Colors.transparent,
