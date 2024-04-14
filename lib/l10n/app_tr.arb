@@ -17,6 +17,7 @@
   "chatsDeleteErrorMessage": "Sohbet kaydı silinirken hata oluştu!",
   "chatsDeleteSuccessTitle": "Başarılı",
   "chatsDeleteSuccessMessage": "Sohbet kaydı başarıyla silindi!",
+  "chatsNotFound": "Sohbet geçmişisi bulunamadı!",
 
   "settingsPageTitle": "Ayarlar",
   "settingsPageDescription": "Kullanıcı Ayarların",
@@ -90,6 +91,7 @@
   "chatScreenMessageInput": "Mesajınız...",
   "chatScreenErrorMessage": "Merhaba, cevap oluştulurken hata oluştu! Hata:",
   "chatScreenImageLoadError": "Resim yüklenemedi...",
+  "chatScreenCopyButton": "Kopyala",
 
   "authPageLoginTitle": "Giriş Yap",
   "authPageLoginDescription": "Hesabınızın detaylarına erişin!",
@@ -102,6 +104,7 @@
   "authPageLoginSuccessMessage": "Başarıyla giriş yapıldı!",
   "authPageLoginDontHaveAccount": "Hesabınız yok mu?",
   "authPageLoginRegisterButton": "Kayıt Ol",
+  "authPageLoginForgotPassword": "Şifreni mi unuttun?",
 
   "authPageRegisterTitle": "Kayıt Ol",
   "authPageRegisterDescription": "Hesabınızın detaylarına erişin!",
@@ -114,9 +117,8 @@
   "authPageRegisterSuccessMessage": "Başarıyla kayıt oldunuz!",
   "authPageRegisterEmailErrorTitle": "Hata",
   "authPageRegisterEmailErrorMessage": "Girilen email zaten kullanılıyor!",
-  "authPageLoginAlreadyHaveAccount": "Hesabınız yok mu?",
-  "authPageLoginLoginButton": "Giriş Yap",
-  "authPageLoginForgotPassword": "Şifreni mi unuttun?",
+  "authPageRegisterAlreadyHaveAccount": "Hesabınız yok mu?",
+  "authPageRegisterLoginButton": "Giriş Yap",
 
   "authPageForgotPasswordTitle": "Şifreni mi unuttun?",
   "authPageForgotPasswordDescription": "Email adresini girerek şifreni sıfırlayabilirsin!",

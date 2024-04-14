@@ -25,7 +25,7 @@ class ChatsScreen extends StatefulWidget {
 class _ChatsScreenState extends State<ChatsScreen> {
   Box<ChatData>? chatDataBox;
   bool chatsLoading = true;
-  List<ChatData>? chats;
+  List<ChatData> chats = [];
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
   @override
@@ -41,11 +41,11 @@ class _ChatsScreenState extends State<ChatsScreen> {
     setState(() {
       chats = List.from(chatDataBox!.values.toList());
 
-      chats?.sort((a, b){
+      chats.sort((a, b){
         return DateTime.parse(b.lastModifiedDate).compareTo(DateTime.parse(a.lastModifiedDate));
       });
 
-      var filtered = chats?.where((element) => element.username == firebaseAuth.currentUser?.email).toList();
+      var filtered = chats.where((element) => element.username == firebaseAuth.currentUser?.email).toList();
 
       chats = filtered;
       chatsLoading = false;
@@ -62,7 +62,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
     setState(() {
       chats = List.from(chatDataBox!.values.toList());
 
-      chats?.sort((a, b){
+      chats.sort((a, b){
         return DateTime.parse(b.lastModifiedDate).compareTo(DateTime.parse(a.lastModifiedDate));
       });
 
@@ -87,7 +87,9 @@ class _ChatsScreenState extends State<ChatsScreen> {
           },
         );
       },
-    );
+    ).whenComplete(() {
+      _updateData();
+    });
   }
 
   Future<void> _deleteChat(ChatData? chatData) async {
@@ -132,7 +134,6 @@ class _ChatsScreenState extends State<ChatsScreen> {
   Widget build(BuildContext context) {
     return AppWrapper(
       content: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -180,30 +181,44 @@ class _ChatsScreenState extends State<ChatsScreen> {
                 ),
               ),
             ),
+          ) : chats.isEmpty ?
+          Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: Text(AppLocalizations.of(context)!.chatsNotFound, style: GoogleFonts.raleway(
+              textStyle: Theme.of(context).textTheme.labelSmall,
+              fontSize: getFontSize(14, context).toDouble()
+            ),),
           ) :
           Expanded(
             child: RefreshIndicator(
+              color: Theme.of(context).textTheme.bodyLarge?.color,
               onRefresh: () async {
                 _updateData();
               },
-              child: Padding(
-                padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
-                child: ListView.builder(
-                  itemCount: chats?.length,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return ChatListItem(
-                      onTap: () {
-                        _showChatModal(chats?[index].messages, chats?[index].AIType);
-                      },
-                      onDeleteButtonTap: () {
-                        _deleteChat(chats?[index]);
-                      },
-                      title: "${AppLocalizations.of(context)!.chatsMyChat} ${index + 1}",
-                      description: chats?[index].messages.first.message.toString() ?? "",
-                      date: chats?[index].lastModifiedDate ?? "",
-                    );
-                  },
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: MediaQuery.of(context).size.height,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
+                  child: ListView.builder(
+                    itemCount: chats.length,
+                    shrinkWrap: true,
+
+                    itemBuilder: (context, index) {
+                      return ChatListItem(
+                        onTap: () {
+                          _showChatModal(chats[index].messages, chats[index].AIType);
+                        },
+                        onDeleteButtonTap: () {
+                          _deleteChat(chats[index]);
+                        },
+                        title: "${AppLocalizations.of(context)!.chatsMyChat} ${index + 1}",
+                        description: chats[index].messages.first.message.toString(),
+                        date: chats[index].lastModifiedDate,
+                      );
+                    },
+                  ),
                 ),
               ),
             ),

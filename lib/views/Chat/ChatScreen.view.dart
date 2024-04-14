@@ -562,15 +562,49 @@ class _NewChatScreenState extends State<ChatScreen> {
                           )
                         ],
                       ) : Container(),
+                      selectedModel == 0 ?
                       Row(
                         children: [
                           Flexible(
-                            flex: 2,
-                            child: ButtonWithIcon(
-                              icon: HeroIcons.document,
-                              onPressed: _showImageOptionsModal,
-                              iconSize: 20,
-                            )
+                            fit: FlexFit.tight,
+                            flex: 12,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                              child: AppInput(
+                                controller: messageController,
+                                maxLines: 1,
+                                isDense: true,
+                                contentPadding: const EdgeInsets.only(top: 10, bottom: 10, right: 20, left: 20),
+                                hintText: AppLocalizations.of(context)!.chatScreenMessageInput,
+                              ),
+                            ),
+                          ),
+                          Flexible(
+                              flex: 2,
+                              child: ButtonWithIcon(
+                                icon: HeroIcons.paper_airplane,
+                                isLoading: waitingResponse,
+                                iconSize: 20,
+                                onPressed: () {
+                                  if (selectedModel == 0) {
+                                    _generateGPTContent(messageController.text);
+                                  } else if (selectedModel == 1) {
+                                    _generateGeminiContent(messageController.text);
+                                  }
+                                },
+                              )
+                          ),
+                        ],
+                      ) :
+                      Row(
+                        children: [
+                          Flexible(
+                              flex: 2,
+                              child: ButtonWithIcon(
+                                icon: HeroIcons.document,
+                                onPressed: _showImageOptionsModal,
+                                iconSize: 20,
+                              )
                           ),
                           Flexible(
                             fit: FlexFit.tight,
@@ -587,19 +621,19 @@ class _NewChatScreenState extends State<ChatScreen> {
                             ),
                           ),
                           Flexible(
-                            flex: 2,
-                            child: ButtonWithIcon(
-                              icon: HeroIcons.paper_airplane,
-                              isLoading: waitingResponse,
-                              iconSize: 20,
-                              onPressed: () {
-                                if (selectedModel == 0) {
-                                  _generateGPTContent(messageController.text);
-                                } else if (selectedModel == 1) {
-                                  _generateGeminiContent(messageController.text);
-                                }
-                              },
-                            )
+                              flex: 2,
+                              child: ButtonWithIcon(
+                                icon: HeroIcons.paper_airplane,
+                                isLoading: waitingResponse,
+                                iconSize: 20,
+                                onPressed: () {
+                                  if (selectedModel == 0) {
+                                    _generateGPTContent(messageController.text);
+                                  } else if (selectedModel == 1) {
+                                    _generateGeminiContent(messageController.text);
+                                  }
+                                },
+                              )
                           ),
                         ],
                       )

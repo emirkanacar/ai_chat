@@ -3,7 +3,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 class AppThemes {
   static final lightTheme = ThemeData(
-    colorScheme: const ColorScheme.dark(
+    brightness: Brightness.light,
+    colorScheme: const ColorScheme.light(
+      brightness: Brightness.light,
       primary: Color(0xFFfdfffe),
       secondary: Color(0xffcfdcf6)
     ),
@@ -65,7 +67,9 @@ class AppThemes {
   );
 
   static final darkTheme = ThemeData(
+    brightness: Brightness.dark,
     colorScheme: const ColorScheme.dark(
+      brightness: Brightness.dark,
       primary: Color(0xff1f1f1f),
       secondary: Color(0xff232323)
     ),

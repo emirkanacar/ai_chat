@@ -17,6 +17,7 @@
   "chatsDeleteErrorMessage": "Error deleting chat log!",
   "chatsDeleteSuccessTitle": "Success",
   "chatsDeleteSuccessMessage": "Chat log successfully deleted!",
+  "chatsNotFound": "Chat history not found!",
 
   "settingsPageTitle": "Settings",
   "settingsPageDescription": "User Settings",
@@ -90,6 +91,7 @@
   "chatScreenMessageInput": "Message...",
   "chatScreenErrorMessage": "Hello, there was an error creating an response! Error:",
   "chatScreenImageLoadError": "Image can't loaded...",
+  "chatScreenCopyButton": "Copy",
 
   "authPageLoginTitle": "Login",
   "authPageLoginDescription": "Access the details of your account!",
@@ -102,6 +104,7 @@
   "authPageLoginSuccessMessage": "Successfully logged in!",
   "authPageLoginDontHaveAccount": "Don't you have an account?",
   "authPageLoginRegisterButton": "Sign Up",
+  "authPageLoginForgotPassword": "Forgot your password?",
 
   "authPageRegisterTitle": "Sign Up",
   "authPageRegisterDescription": "Access the details of your account!",
@@ -116,7 +119,6 @@
   "authPageRegisterEmailErrorMessage": "The email entered is already in use!",
   "authPageRegisterAlreadyHaveAccount": "Don't you have an account?",
   "authPageRegisterLoginButton": "Log In",
-  "authPageLoginForgotPassword": "Forgot your password?",
 
   "authPageForgotPasswordTitle": "Forgot your password?",
   "authPageForgotPasswordDescription": "You can reset your password by entering your email address!",

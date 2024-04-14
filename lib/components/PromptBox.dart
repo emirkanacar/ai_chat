@@ -20,16 +20,13 @@ class PromptBox extends StatelessWidget {
         margin: const EdgeInsets.only(top: 4, bottom: 4, right: 4, left: 4),
         decoration: BoxDecoration(
             color: Theme.of(context).dialogBackgroundColor,
-            borderRadius: const BorderRadius.all(Radius.circular(15)),
+            borderRadius: const BorderRadius.all(Radius.circular(12)),
             border: Border.fromBorderSide(BorderSide(color: Theme.of(context).dividerColor))
         ),
         child: Material(
           color: Colors.transparent,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15.0),
-          ),
           child: InkWell(
-            radius: 15,
+            borderRadius: BorderRadius.circular(12.0),
             onTap: onTap,
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),

@@ -104,6 +104,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         AppInput(
                           controller: _passwordController,
+                          filled: true,
                           obscureText: _passwordHidden,
                           hintText: AppLocalizations.of(context)!.authPageRegisterPassword,
                           prefixIcon: Iconsax.password_check_outline,

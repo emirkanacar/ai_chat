@@ -6,9 +6,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:markdown/markdown.dart' as md;
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../helpers/functions.dart';
 import '../../providers/SettingsProvider.dart';
+import 'MarkdownStyleBuilder.dart';
 
 class MessageBubble extends StatelessWidget {
   const MessageBubble({
@@ -152,14 +155,28 @@ class MessageBubble extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 2),
                       shrinkWrap: true,
                       selectable: true,
+                      softLineBreak: true,
+                      onTapLink: (text, link, _) {
+                        final url = link ?? '/';
+                        if (url.startsWith('http')) {
+                          launchUrl(Uri.parse(url));
+                        }
+                      },
                       data: messageText,
                       physics: const NeverScrollableScrollPhysics(),
+                      extensionSet: md.ExtensionSet(
+                        md.ExtensionSet.gitHubFlavored.blockSyntaxes,
+                        [md.EmojiSyntax(), ...md.ExtensionSet.gitHubFlavored.inlineSyntaxes],
+                      ),
                       styleSheet: MarkdownStyleSheet(
                         h1: GoogleFonts.raleway(),
                         h2: GoogleFonts.raleway(),
                         a: GoogleFonts.raleway(),
                         p: GoogleFonts.raleway(fontSize: getFontSize(16, context).toDouble()),
                       ),
+                      builders: {
+                        'code': CodeElementBuilder(settingsProvider.appSettings?.theme ?? "dark", AppLocalizations.of(context)!.chatScreenCopyButton)
+                      },
                     ),
                   )
               ),

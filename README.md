@@ -24,7 +24,7 @@ Clone Project
 Open Project Folder
 
 ```bash
-  cd ai-chat
+  cd ai_chat
 ```
 
 Install Flutter Dependencies
@@ -60,7 +60,7 @@ For Release Mode:
   flutter run --release
 ```
 
-## Ekran Görüntüleri
+## Screenshots
 
 ![SignUp Screen](https://i.ibb.co/j8f8LMV/signup-screen.png)
 

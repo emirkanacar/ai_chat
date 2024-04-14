@@ -68,6 +68,7 @@ class MyApp extends StatelessWidget {
       theme: AppThemes.lightTheme,
       darkTheme: AppThemes.darkTheme,
       themeMode: settingsProvider.appSettings?.theme == "dark" ? ThemeMode.dark : ThemeMode.light,
+      themeAnimationCurve: Curves.easeIn,
       home: const SplashScreen(),
       routes: {
         '/home': (context) => const HomeScreen(),
