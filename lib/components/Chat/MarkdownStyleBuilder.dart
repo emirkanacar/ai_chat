@@ -1,6 +1,6 @@
+import 'package:ai_chat/components/Chat/CustomHighlightView.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_highlighter/flutter_highlighter.dart';
 import 'package:flutter_highlighter/themes/atom-one-dark.dart';
 import 'package:flutter_highlighter/themes/atom-one-light.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
@@ -24,8 +24,9 @@ class CodeElementBuilder extends MarkdownElementBuilder {
       language = lg.substring(9);
     }
 
-    return SizedBox(
+    return Container(
       width: data.size.width,
+      padding: const EdgeInsets.only(top: 15, bottom: 15),
       child: Column(
         children: [
           Container(
@@ -71,7 +72,8 @@ class CodeElementBuilder extends MarkdownElementBuilder {
               ],
             ),
           ),
-          HighlightView(
+          CustomHighlightView(
+            width: data.size.width,
             element.textContent,
             language: language,
             theme: theme == "light" ? atomOneLightTheme : atomOneDarkTheme,

@@ -14,7 +14,9 @@ class AppInput extends StatelessWidget {
     this.contentPadding,
     this.maxLines,
     this.obscureText,
-    this.suffixIcon
+    this.suffixIcon,
+    this.focusNode,
+    this.autofocus
   }) : super(key: key);
 
   final TextEditingController? controller;
@@ -27,6 +29,8 @@ class AppInput extends StatelessWidget {
   final int? maxLines;
   final bool? obscureText;
   final Widget? suffixIcon;
+  final FocusNode? focusNode;
+  final bool? autofocus;
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +39,8 @@ class AppInput extends StatelessWidget {
       readOnly: readOnly ?? false,
       maxLines: maxLines ?? 1,
       obscureText: obscureText ?? false,
+      focusNode: focusNode,
+      autofocus: autofocus ?? false,
       decoration: InputDecoration(
           filled: filled,
           isDense: isDense,

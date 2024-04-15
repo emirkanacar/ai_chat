@@ -32,7 +32,7 @@ class PromptBox extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
               child: Text(promptText, style: GoogleFonts.raleway(
                   fontWeight: FontWeight.w500,
-                  fontSize: getFontSize(12, context).toDouble()
+                  fontSize: getFontSize(14, context).toDouble()
               ),
               ),
             ),

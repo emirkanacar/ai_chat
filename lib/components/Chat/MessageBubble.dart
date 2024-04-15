@@ -1,8 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -34,7 +36,7 @@ class MessageBubble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DateTime dateTimeWithTimeZone = DateTime.parse(messageDate);
-    SettingsProvider settingsProvider = context.watch<SettingsProvider>();
+    SettingsProvider settingsProvider = context.read<SettingsProvider>();
     String model = selectedModel == 0 ? "ChatGPT" : "Gemini";
 
     return direction ? Column(
@@ -151,33 +153,66 @@ class MessageBubble extends StatelessWidget {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.only(left: 5, right: 5),
-                    child: Markdown(
-                      padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 2),
-                      shrinkWrap: true,
-                      selectable: true,
-                      softLineBreak: true,
-                      onTapLink: (text, link, _) {
-                        final url = link ?? '/';
-                        if (url.startsWith('http')) {
-                          launchUrl(Uri.parse(url));
-                        }
-                      },
-                      data: messageText,
-                      physics: const NeverScrollableScrollPhysics(),
-                      extensionSet: md.ExtensionSet(
-                        md.ExtensionSet.gitHubFlavored.blockSyntaxes,
-                        [md.EmojiSyntax(), ...md.ExtensionSet.gitHubFlavored.inlineSyntaxes],
-                      ),
-                      styleSheet: MarkdownStyleSheet(
-                        h1: GoogleFonts.raleway(),
-                        h2: GoogleFonts.raleway(),
-                        a: GoogleFonts.raleway(),
-                        p: GoogleFonts.raleway(fontSize: getFontSize(16, context).toDouble()),
-                      ),
-                      builders: {
-                        'code': CodeElementBuilder(settingsProvider.appSettings?.theme ?? "dark", AppLocalizations.of(context)!.chatScreenCopyButton)
-                      },
-                    ),
+                    child: Column(
+                      children: [
+                        Markdown(
+                          padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 2),
+                          shrinkWrap: true,
+                          selectable: true,
+                          softLineBreak: true,
+                          onTapLink: (text, link, _) {
+                            final url = link ?? '/';
+                            if (url.startsWith('http')) {
+                              launchUrl(Uri.parse(url));
+                            }
+                          },
+                          data: messageText,
+                          physics: const NeverScrollableScrollPhysics(),
+                          extensionSet: md.ExtensionSet(
+                            md.ExtensionSet.gitHubFlavored.blockSyntaxes,
+                            [md.EmojiSyntax(), ...md.ExtensionSet.gitHubFlavored.inlineSyntaxes],
+                          ),
+                          styleSheet: MarkdownStyleSheet(
+                            h1: GoogleFonts.raleway(),
+                            h2: GoogleFonts.raleway(),
+                            a: GoogleFonts.raleway(),
+                            p: GoogleFonts.raleway(fontSize: getFontSize(16, context).toDouble()),
+                          ),
+                          builders: {
+                            'code': CodeElementBuilder(settingsProvider.appSettings?.theme ?? "dark", AppLocalizations.of(context)!.chatScreenCopyButton)
+                          },
+                        ),
+                        messageText.contains("```") == false ? Container(
+                          width: 100,
+                          decoration: BoxDecoration(
+                              color: settingsProvider.appSettings?.theme == "light" ? const Color(0xff1f1f1f).withOpacity(0.2): const Color(0xff1f1f1f),
+                              borderRadius: const BorderRadius.all(Radius.circular(12))
+                          ),
+                          child: Material(
+                            color: Colors.transparent,
+                            child: InkWell(
+                                borderRadius: const BorderRadius.all(Radius.circular(12)),
+                                onTap: () {
+                                  Clipboard.setData(ClipboardData(text: messageText));
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(AppLocalizations.of(context)!.chatScreenCopyButton),
+                                      const Padding(
+                                        padding: EdgeInsets.only(left: 10),
+                                        child: Icon(Iconsax.copy_outline, size: 16,),
+                                      )
+                                    ],
+                                  ),
+                                )
+                            ),
+                          ),
+                        ) : Container()
+                      ],
+                    )
                   )
               ),
             )

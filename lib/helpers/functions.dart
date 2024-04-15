@@ -7,11 +7,17 @@ import 'package:path/path.dart' as path;
 import 'package:provider/provider.dart';
 
 Future<String> saveFile(File file, String fileName) async {
-  Directory docDirectory = await getApplicationDocumentsDirectory();
+  Directory? docDirectory;
+
+  if (Platform.isIOS) {
+    docDirectory = await getApplicationDocumentsDirectory();
+  } else {
+    docDirectory = await getDownloadsDirectory();
+  }
 
   String ext = file.path.split(".").last;
 
-  File newFile = File(path.join(docDirectory.path, path.basename("$fileName.$ext")));
+  File newFile = File(path.join(docDirectory!.path, path.basename("$fileName.$ext")));
   var bytes = await file.readAsBytes();
 
   await newFile.writeAsBytes(bytes);

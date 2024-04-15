@@ -5,12 +5,14 @@ import 'package:ai_chat/components/ButtonWithIcon.dart';
 import 'package:ai_chat/components/CategoryButton.dart';
 import 'package:ai_chat/components/PromptBox.dart';
 import 'package:ai_chat/models/suggestion.dart';
+import 'package:ai_chat/providers/SettingsProvider.dart';
 import 'package:ai_chat/views/Chat/ChatScreen.view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 import '../helpers/functions.dart';
 
@@ -25,12 +27,15 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   Suggestion? suggestions;
   int selectedCategoryIndex = 0;
+  SettingsProvider? settingsProvider;
 
   @override
   void initState() {
-    super.initState();
+    settingsProvider = context.read<SettingsProvider>();
 
     fetchSuggestions();
+
+    super.initState();
   }
 
   Future<void> fetchSuggestions() async {
@@ -65,6 +70,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    settingsProvider = context.watch<SettingsProvider>();
+
     return AppWrapper(
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -133,9 +140,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 itemCount: suggestions?.data[selectedCategoryIndex].prompts.length,
                 itemBuilder: (BuildContext context, int index) {
                   return PromptBox(
-                      promptText: suggestions?.data[selectedCategoryIndex].prompts[index].prompt ?? "",
+                      promptText: settingsProvider?.appSettings?.language == "tr" ? suggestions?.data[selectedCategoryIndex].prompts[index].promptLabelTurkish ?? "" : suggestions?.data[selectedCategoryIndex].prompts[index].promptLabel ?? "",
                       onTap: () {
-                        _showChatModal(suggestions?.data[selectedCategoryIndex].prompts[index].promptCode);
+                        _showChatModal(settingsProvider?.appSettings?.language == "tr" ? suggestions?.data[selectedCategoryIndex].prompts[index].promptTurkish : suggestions?.data[selectedCategoryIndex].prompts[index].prompt);
                       }
                   );
                 },

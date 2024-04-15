@@ -6,20 +6,39 @@
       "categoryName": "E-Mail",
       "prompts": [
         {
-          "promptCode": "email-1",
-          "prompt": "email-1"
+          "promptCode": "email_1",
+          "promptLabel": "Schedule a meeting or call",
+          "promptLabelTurkish": "Bir toplantı veya arama planlayın",
+          "prompt": "Compose an email to schedule a meeting with [name] to discuss [the goal of the discussion]. Ask them when they're free, and keep the email short.",
+          "promptTurkish": "[isim] ile [tartışmanın amacı] hakkında görüşmek üzere bir toplantı planlamak için bir e-posta oluşturun. Ne zaman müsait olduklarını sorun ve e-postayı kısa tutun."
         },
         {
-          "promptCode": "email-2",
-          "prompt": "email-2"
+          "promptCode": "email_2",
+          "promptLabel": "Submit a job application",
+          "promptLabelTurkish": "İş başvurusu gönderin",
+          "prompt": "Compose a job application email for the position of [job title] at [company name], showing enthusiasm for the role and the company, and an attachment of your resume. Maintain a professional and engaging tone, addressing the email to the hiring manager by Iname of hiring manager] and including a call-to-action to schedule an interview.",
+          "promptTurkish": "[Şirket adı]'ndaki [iş unvanı] pozisyonu için bir iş başvurusu e-postası oluşturun, rol ve şirket için heyecanınızı gösterin ve özgeçmişinizi ekleyin. Profesyonel ve ilgi çekici bir üslup kullanın, e-postada işe alım müdürüne [işe alım müdürünün adı] ile hitap edin ve bir görüşme planlamak için harekete geçirici bir mesaj ekleyin."
         },
         {
-          "promptCode": "email-3",
-          "prompt": "email-3"
+          "promptCode": "email_3",
+          "promptLabel": "Upcoming Meeting Email",
+          "promptLabelTurkish": "Yaklaşan Toplantı E-postası",
+          "prompt": "Generate a gentle reminder email to remind a client, [Client Name], about an upcoming meeting scheduled for [Date and Time]. The purpose of the meeting is to discuss [Meeting Agenda]. Please encourage the client to come prepared with any relevant materials or questions. Keep it brief.",
+          "promptTurkish": "Bir müşteriye, [Müşteri Adı], [Tarih ve Saat] için planlanan yaklaşan bir toplantıyı hatırlatmak için nazik bir hatırlatma e-postası oluşturun. Toplantının amacı [Toplantı Gündemi] konusunu görüşmektir. Lütfen müşteriyi ilgili materyalleri veya soruları ile hazırlıklı gelmeye teşvik edin. Kısa tutun."
         },
         {
-          "promptCode": "email-4",
-          "prompt": "email-4"
+          "promptCode": "email_4",
+          "promptLabel": "Event Invitation",
+          "promptLabelTurkish": "Etkinlik Davetiyesi",
+          "prompt": "Create a captivating event invitation email, providing details about the event, its significance, and a clear call to action for registration or attendance. Keep it within 180-200 words.",
+          "promptTurkish": "Etkinlikle ilgili ayrıntılar, etkinliğin önemi ve kayıt veya katılım için net bir eylem çağrısı sunan etkileyici bir etkinlik davet e-postası oluşturun. 180-200 kelime arasında tutun."
+        },
+        {
+          "promptCode": "email_5",
+          "promptLabel": "Event Registration",
+          "promptLabelTurkish": "Etkinlik Kaydı",
+          "prompt": "Generate a gentle reminder email to remind a customer, [Customer Name], about an upcoming event they registered for. Reinforce the value of the event, provide event details, and offer assistance with any queries or concerns. Keep it brief.",
+          "promptTurkish": "Bir müşteriye, [Müşteri Adı], kayıt yaptırdığı yaklaşan bir etkinliği hatırlatmak için nazik bir hatırlatma e-postası oluşturun. Etkinliğin değerini pekiştirin, etkinlik ayrıntılarını sağlayın ve herhangi bir soru veya endişeyle ilgili yardım teklif edin. Kısa tutun."
         }
       ]
     },
@@ -28,42 +47,39 @@
       "categoryName": "Education",
       "prompts": [
         {
-          "promptCode": "education-1",
-          "prompt": "education-1"
+          "promptCode": "education_1",
+          "promptLabel": "Provide a summary of the topic",
+          "promptLabelTurkish": "Konuyla ilgili bir özet oluşturun",
+          "prompt": "Provide a summary of [research topic]",
+          "promptTurkish": "[Araştırma konusunun] bir özetini sağlayın"
         },
         {
-          "promptCode": "education-2",
-          "prompt": "education-2"
+          "promptCode": "education_2",
+          "promptLabel": "Create a composition on the topic",
+          "promptLabelTurkish": "Konuyla alakalı bir kompozisyon oluşturun",
+          "prompt": "Can you write me an essay about [topic]? Not too long, 350-400 characters long.",
+          "promptTurkish": "[konu] hakkında bana bir kompozisyon yazar mısın ? Çok uzun olmasın 350-400 karakter uzunluğunda olsun."
         },
         {
-          "promptCode": "education-3",
-          "prompt": "education-3"
+          "promptCode": "education_3",
+          "promptLabel": "Create a study plan",
+          "promptLabelTurkish": "Bir çalışma planı oluşturun",
+          "prompt": "I need help to organise my study time for [subject/topic]. Can you create a study plan for me, including breaks and practice exercises?",
+          "promptTurkish": "[Konu] için çalışma zamanımı düzenlemek için yardıma ihtiyacım var. Benim için molalar ve alıştırmalar da dahil olmak üzere bir çalışma planı oluşturabilir misiniz?"
         },
         {
-          "promptCode": "education-4",
-          "prompt": "education-4"
-        }
-      ]
-    },
-    {
-      "categoryCode": "art",
-      "categoryName": "Art",
-      "prompts": [
-        {
-          "promptCode": "art-1",
-          "prompt": "art-1"
+          "promptCode": "education_4",
+          "promptLabel": "Summarize long texts",
+          "promptLabelTurkish": "Uzun metinleri özetle",
+          "prompt": "I need to read a complicated article related to [topic]. Here are the content [insert content]. Can you help me summarize the key points and takeaways from the text?",
+          "promptTurkish": "[Konu] ile ilgili karmaşık bir makale okumam gerekiyor. İşte içerik [içeriği girin]. Metindeki kilit noktaları ve çıkarımları özetlememe yardımcı olabilir misiniz?"
         },
         {
-          "promptCode": "art-2",
-          "prompt": "art-2"
-        },
-        {
-          "promptCode": "art-3",
-          "prompt": "art-3"
-        },
-        {
-          "promptCode": "art-4",
-          "prompt": "art-4"
+          "promptCode": "education_5",
+          "promptLabel": "Compare and contrast",
+          "promptLabelTurkish": "Karşılaştır ve kıyasla",
+          "prompt": "Compare and contrast [concept 1] and [concept 2] to better understand their similarities and differences.",
+          "promptTurkish": "Benzerliklerini ve farklılıklarını daha iyi anlamak için [kavram 1] ve [kavram 2]'yi karşılaştırın."
         }
       ]
     },
@@ -72,20 +88,39 @@
       "categoryName": "Fun",
       "prompts": [
         {
-          "promptCode": "fun-1",
-          "prompt": "fun-1"
+          "promptCode": "fun_1",
+          "promptLabel": "Can you make a joke about AI?",
+          "promptLabelTurkish": "Yapay zeka hakkında şaka yapabilir misin?",
+          "prompt": "Can you make a joke about AI?",
+          "promptTurkish": "Yapay zeka hakkında şaka yapabilir misin?"
         },
         {
-          "promptCode": "fun-2",
-          "prompt": "fun-2"
+          "promptCode": "fun_2",
+          "promptLabel": "Generate a parody of a popular song",
+          "promptLabelTurkish": "Popüler bir şarkının parodisini oluşturun",
+          "prompt": "Hey ChatGPT, can you generate a funny parody of a popular song using random lyrics?.",
+          "promptTurkish": "Hey ChatGPT, rastgele sözler kullanarak popüler bir şarkının komik bir parodisini oluşturabilir misin?"
         },
         {
-          "promptCode": "fun-3",
-          "prompt": "fun-3"
+          "promptCode": "fun_3",
+          "promptLabel": "Create funny reviews about famous paintings",
+          "promptLabelTurkish": "Ünlü tablolar hakkında komik eleştiriler oluştur",
+          "prompt": "Hey ChatGPT, what do you think of the Mona Lisa? Give me a funny critique.",
+          "promptTurkish": "Hey ChatGPT, Mona Lisa hakkında ne düşünüyorsun? Bana komik bir eleştiri yap."
         },
         {
-          "promptCode": "fun-4",
-          "prompt": "fun-4"
+          "promptCode": "fun_4",
+          "promptLabel": "Tell me a joke",
+          "promptLabelTurkish": "Bana bir şaka yap",
+          "prompt": "Tell me a joke",
+          "promptTurkish": "Bana bir şaka yap"
+        },
+        {
+          "promptCode": "fun_5",
+          "promptLabel": "Movie to Emoji",
+          "promptLabelTurkish": "Filmi Emoji ile Açıkla",
+          "prompt": "Can you explain the movie [movie title] with emojis",
+          "promptTurkish": "[film adı] adlı filmi emojiler ile açıklar mısın?"
         }
       ]
     },
@@ -94,20 +129,39 @@
       "categoryName": "Social",
       "prompts": [
         {
-          "promptCode": "social-1",
-          "prompt": "social-1"
+          "promptCode": "social_1",
+          "promptLabel": "Birthday Message",
+          "promptLabelTurkish": "Doğum Günü Mesajı",
+          "prompt": "Can you write a nice birthday message for my friend [name]?",
+          "promptTurkish": "Arkadaşım [isim] için güzel bir doğum günü mesajı yazar mısın?"
         },
         {
-          "promptCode": "social-2",
-          "prompt": "social-2"
+          "promptCode": "social_2",
+          "promptLabel": "Generate a parody of a popular song",
+          "promptLabelTurkish": "Popüler bir şarkının parodisini oluşturun",
+          "prompt": "Hey ChatGPT, can you generate a funny parody of a popular song using random lyrics?.",
+          "promptTurkish": "Hey ChatGPT, rastgele sözler kullanarak popüler bir şarkının komik bir parodisini oluşturabilir misin?"
         },
         {
-          "promptCode": "social-3",
-          "prompt": "social-3"
+          "promptCode": "social_3",
+          "promptLabel": "Create funny reviews about famous paintings",
+          "promptLabelTurkish": "Ünlü tablolar hakkında komik eleştiriler oluştur",
+          "prompt": "Hey ChatGPT, what do you think of the Mona Lisa? Give me a funny critique.",
+          "promptTurkish": "Hey ChatGPT, Mona Lisa hakkında ne düşünüyorsun? Bana komik bir eleştiri yap."
         },
         {
-          "promptCode": "social-4",
-          "prompt": "social-4"
+          "promptCode": "social_4",
+          "promptLabel": "Tell me a joke",
+          "promptLabelTurkish": "Bana bir şaka yap",
+          "prompt": "Tell me a joke",
+          "promptTurkish": "Bana bir şaka yap"
+        },
+        {
+          "promptCode": "social_5",
+          "promptLabel": "Movie to Emoji",
+          "promptLabelTurkish": "Filmi Emoji ile Açıkla",
+          "prompt": "Can you explain the movie [movie title] with emojis",
+          "promptTurkish": "[film adı] adlı filmi emojiler ile açıklar mısın?"
         }
       ]
     },
@@ -116,20 +170,39 @@
       "categoryName": "Travel",
       "prompts": [
         {
-          "promptCode": "travel-1",
-          "prompt": "travel-1"
+          "promptCode": "travel_1",
+          "promptLabel": "Create a Travel Playlist",
+          "promptLabelTurkish": "Seyahat için Çalma Listesi Oluşturun",
+          "prompt": "Heading to [destination], and I’d love a playlist reflecting the local music scene’s vibe in [country/city]. Include songs and artists aligned with my taste in [genres/artists/songs] to set the mood for sightseeing and exploring.",
+          "promptTurkish": "[konuma]'a gidiyorum ve [ülke/şehir]'deki yerel müzik ortamının havasını yansıtan bir çalma listesi istiyorum."
         },
         {
-          "promptCode": "travel-2",
-          "prompt": "travel-2"
+          "promptCode": "travel_2",
+          "promptLabel": "Generate a list of family-friendly activities in location",
+          "promptLabelTurkish": "Bölgedeki aile dostu etkinliklerin bir listesini oluşturun",
+          "prompt": "Generate a list of family-friendly activities in [location]",
+          "promptTurkish": "[Konum] aile dostu etkinliklerin bir listesini oluşturun"
         },
         {
-          "promptCode": "travel-3",
-          "prompt": "travel-3"
+          "promptCode": "travel_3",
+          "promptLabel": "Generate a 7-day itinerary for a cultural trip to Rome.",
+          "promptLabelTurkish": "Roma'ya kültürel bir gezi için 7 günlük bir seyahat programı oluşturun.",
+          "prompt": "Generate a 7-day itinerary for a cultural trip to Rome.",
+          "promptTurkish": "Roma'ya kültürel bir gezi için 7 günlük bir seyahat programı oluşturun."
         },
         {
-          "promptCode": "travel-4",
-          "prompt": "travel-4"
+          "promptCode": "travel_4",
+          "promptLabel": "What are the top 10 most romantic destinations in Europe?",
+          "promptLabelTurkish": "Avrupa'daki en romantik 10 yer neresidir?",
+          "prompt": "What are the top 10 most romantic destinations in Europe?",
+          "promptTurkish": "Avrupa'daki en romantik 10 yer neresidir?"
+        },
+        {
+          "promptCode": "travel_5",
+          "promptLabel": "How can I experience local music and cultural events in New Orleans?",
+          "promptLabelTurkish": "New Orleans'ta yerel müzik ve kültürel etkinlikleri nasıl deneyimleyebilirim?",
+          "prompt": "How can I experience local music and cultural events in New Orleans? ",
+          "promptTurkish": "New Orleans'ta yerel müzik ve kültürel etkinlikleri nasıl deneyimleyebilirim?"
         }
       ]
     }

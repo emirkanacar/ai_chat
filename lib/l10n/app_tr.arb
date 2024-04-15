@@ -92,6 +92,8 @@
   "chatScreenErrorMessage": "Merhaba, cevap oluştulurken hata oluştu! Hata:",
   "chatScreenImageLoadError": "Resim yüklenemedi...",
   "chatScreenCopyButton": "Kopyala",
+  "chatScreenImageAddErrorTitle": "Hata",
+  "chatScreenImageAddErrorMessage": "Resim eklenirken hata oluştu! Tekrar deneyin...",
 
   "authPageLoginTitle": "Giriş Yap",
   "authPageLoginDescription": "Hesabınızın detaylarına erişin!",

@@ -48,6 +48,7 @@ class ChatScreen extends StatefulWidget {
 class _NewChatScreenState extends State<ChatScreen> {
   final TextEditingController messageController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
+  final FocusNode _messageInputFocus = FocusNode();
   final ImagePicker picker = ImagePicker();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   SettingsProvider? _settingsProvider;
@@ -294,8 +295,29 @@ class _NewChatScreenState extends State<ChatScreen> {
                             fontSize: getFontSize(16, context).toDouble()
                           ),
                         ),
-                        onTap: () async {
-                          await picker.pickImage(source: ImageSource.camera);
+                        onTap: () {
+                          picker.pickImage(source: ImageSource.camera).then((selectedImage) async {
+                            if (selectedImage != null) {
+
+                              String saveImageToLocalPath = await saveFile(File(selectedImage.path), "${chatId}_${DateTime.now().millisecondsSinceEpoch}");
+
+                              setState(() {
+                                selectedImages.add(saveImageToLocalPath);
+                              });
+
+                              Navigator.pop(context);
+                            }
+                          }).catchError((error) {
+                            toastification.show(
+                              context: context,
+                              type: ToastificationType.error,
+                              style: ToastificationStyle.flatColored,
+                              title: Text(AppLocalizations.of(context)!.chatScreenImageAddErrorTitle, style: GoogleFonts.raleway(fontWeight: FontWeight.w700),),
+                              description: Text(AppLocalizations.of(context)!.chatScreenImageAddErrorMessage, style: GoogleFonts.raleway()),
+                              alignment: Alignment.topCenter,
+                              autoCloseDuration: const Duration(seconds: 3),
+                            );
+                          });
                         },
                       ),
                       Divider(color: Theme.of(context).dividerColor),
@@ -312,7 +334,7 @@ class _NewChatScreenState extends State<ChatScreen> {
                             fontSize: getFontSize(16, context).toDouble()
                           ),
                         ),
-                        onTap: () async {
+                        onTap: () {
                           picker.pickImage(source: ImageSource.gallery).then((selectedImage) async {
                             if (selectedImage != null) {
 
@@ -324,6 +346,16 @@ class _NewChatScreenState extends State<ChatScreen> {
 
                               Navigator.pop(context);
                             }
+                          }).catchError((error) {
+                            toastification.show(
+                              context: context,
+                              type: ToastificationType.error,
+                              style: ToastificationStyle.flatColored,
+                              title: Text("Hata!", style: GoogleFonts.raleway(fontWeight: FontWeight.w700),),
+                              description: Text("Resim eklenirken hata oluştu!", style: GoogleFonts.raleway()),
+                              alignment: Alignment.topCenter,
+                              autoCloseDuration: const Duration(seconds: 3),
+                            );
                           });
                         },
                       ),
@@ -371,7 +403,7 @@ class _NewChatScreenState extends State<ChatScreen> {
                               color: _settingsProvider?.appSettings?.theme == "dark" ? Colors.white : Colors.black,
                             ),
                             items: [
-                              DropdownMenuItem(
+                              DropdownItem(
                                 value: "delete",
                                 child: Row(
                                   children: [
@@ -380,21 +412,23 @@ class _NewChatScreenState extends State<ChatScreen> {
                                       child: Icon(HeroIcons.trash, size: 18, color: _settingsProvider?.appSettings?.theme == "dark" ? Colors.white : Colors.black),
                                     ),
                                     Text(AppLocalizations.of(context)!.chatScreenDeleteChat, style: GoogleFonts.raleway(
-                                      color: _settingsProvider?.appSettings?.theme == "dark" ? Colors.white : Colors.black
+                                        color: _settingsProvider?.appSettings?.theme == "dark" ? Colors.white : Colors.black
                                     ),)
                                   ],
                                 ),
                               ),
                             ],
-                            onChanged: (value) {
-                              if (chatMessages.isEmpty) {
-                                Navigator.pop(context);
-                              } else {
-                                _deleteChat();
+                            onChanged: (value) async {
+                              if (value == "delete") {
+                                if (chatMessages.isEmpty) {
+                                  Navigator.pop(context);
+                                } else {
+                                  _deleteChat();
+                                }
                               }
                             },
                             dropdownStyleData: DropdownStyleData(
-                              width: 160,
+                              width: 200,
                               padding: const EdgeInsets.symmetric(vertical: 0),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(4),
@@ -404,9 +438,6 @@ class _NewChatScreenState extends State<ChatScreen> {
                               offset: const Offset(0, 0),
                             ),
                             menuItemStyleData: const MenuItemStyleData(
-                              customHeights: [
-                                48,
-                              ],
                               padding: EdgeInsets.only(left: 16, right: 0),
                             ),
                             buttonStyleData: ButtonStyleData(
@@ -574,6 +605,8 @@ class _NewChatScreenState extends State<ChatScreen> {
                                 controller: messageController,
                                 maxLines: 1,
                                 isDense: true,
+                                autofocus: false,
+                                focusNode: _messageInputFocus,
                                 contentPadding: const EdgeInsets.only(top: 10, bottom: 10, right: 20, left: 20),
                                 hintText: AppLocalizations.of(context)!.chatScreenMessageInput,
                               ),

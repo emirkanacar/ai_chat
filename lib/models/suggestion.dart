@@ -52,21 +52,33 @@ class Prompt {
   Prompt({
     required this.promptCode,
     required this.prompt,
+    required this.promptLabel,
+    required this.promptLabelTurkish,
+    required this.promptTurkish
   });
 
   final String? promptCode;
+  final String? promptLabel;
+  final String? promptLabelTurkish;
   final String? prompt;
+  final String? promptTurkish;
 
   factory Prompt.fromJson(Map<String, dynamic> json){
     return Prompt(
       promptCode: json["promptCode"],
       prompt: json["prompt"],
+      promptLabel: json["promptLabel"],
+      promptLabelTurkish: json["promptLabelTurkish"],
+      promptTurkish: json["promptTurkish"]
     );
   }
 
   Map<String, dynamic> toJson() => {
     "promptCode": promptCode,
     "prompt": prompt,
+    "promptLabel": promptLabel,
+    "promptLabelTurkish": promptLabelTurkish,
+    "promptTurkish": promptTurkish
   };
 
 }

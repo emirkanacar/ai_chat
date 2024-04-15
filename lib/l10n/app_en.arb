@@ -92,6 +92,8 @@
   "chatScreenErrorMessage": "Hello, there was an error creating an response! Error:",
   "chatScreenImageLoadError": "Image can't loaded...",
   "chatScreenCopyButton": "Copy",
+  "chatScreenImageAddErrorTitle": "Error",
+  "chatScreenImageAddErrorMessage": "Error adding image! Try again...",
 
   "authPageLoginTitle": "Login",
   "authPageLoginDescription": "Access the details of your account!",

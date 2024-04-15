@@ -33,6 +33,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   final TextEditingController _loginPassword = TextEditingController();
 
   FirebaseAuth? firebaseAuth;
+  String? userDisplayName;
 
   SettingsProvider? _settingsProvider;
   double slidingValue = 16;
@@ -47,6 +48,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _settingsProvider = context.read<SettingsProvider>();
     slidingValue = _settingsProvider?.appSettings?.fontSize.toDouble() ?? 16;
     firebaseAuth = FirebaseAuth.instance;
+
+    userDisplayName = firebaseAuth?.currentUser?.displayName;
 
     super.initState();
   }
@@ -164,6 +167,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                     modalSetState(() {
                                       firebaseAuth?.currentUser?.reload();
                                       isNameLoading = false;
+                                      userDisplayName = _firstNameController.value.text;
+                                    });
+
+                                    setState(() {
+                                      userDisplayName = _firstNameController.value.text;
                                     });
 
                                     Navigator.pop(context);
@@ -762,7 +770,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             children: [
                               Padding(
                                   padding: const EdgeInsets.only(left: 10, right: 20, top: 0, bottom: 0),
-                                  child: Text(firebaseAuth?.currentUser?.displayName ?? "", style: GoogleFonts.raleway(
+                                  child: Text(userDisplayName ?? "", style: GoogleFonts.raleway(
                                       fontWeight: FontWeight.w600,
                                       fontSize: getFontSize(16, context).toDouble()
                                   ),)
