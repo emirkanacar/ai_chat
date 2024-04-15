@@ -62,14 +62,6 @@ For Release Mode:
 
 ## Screenshots
 
-![Login Screen](https://i.ibb.co/4Fc25D5/login.png)
-
-![Home Screen](https://i.ibb.co/cNfqFvg/homepage.png)
-
-![Chat Dialog](https://i.ibb.co/DDX0DzF/chat-dialog.png)
-
-![Chat History](https://i.ibb.co/qW1wqZ8/chatspage.png)
-
-![Settings Screen](https://i.ibb.co/TYxGZyK/settings.png)
+![](https://i.ibb.co/4mQfk0g/settings-imageonline-co-merged.png)
 
   
