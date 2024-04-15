@@ -62,11 +62,11 @@ For Release Mode:
 
 ## Screenshots
 
-![SignUp Screen](https://i.ibb.co/j8f8LMV/signup-screen.png)
+![Login Screen](https://i.ibb.co/4Fc25D5/login.png)
 
-![Home Screen](https://i.ibb.co/9HynyGQ/homepage.png)
+![Home Screen](https://i.ibb.co/cNfqFvg/homepage.png)
 
-![Chat Dialog](https://i.ibb.co/4Rd9R7T/chat-dialog.png)
+![Chat Dialog](https://i.ibb.co/DDX0DzF/chat-dialog.png)
 
 ![Chat History](https://i.ibb.co/qW1wqZ8/chatspage.png)
 
